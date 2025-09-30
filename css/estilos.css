@@ -1,0 +1,475 @@
+
+
+h1,
+h3,
+label,
+div,
+input,
+header,
+nav,
+ul,
+body {
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    padding-top: 150px;
+    font-family: sans-serif;
+    position: relative;
+    
+}
+
+header {
+    position: fixed;
+    top: 0px;  
+    width: 100%;
+    background-color: #fff;
+    height: 20%;
+
+}
+
+.barraNavSuperior{
+    padding: 10px;
+    position: relative;
+}
+
+
+#logo {
+    width: 50px;
+    position: relative;
+    top: 10px;
+    display: inline-block;
+}
+.local{
+    margin-left: 2%;
+}
+.Envios{
+    margin-left: 9px;
+
+}
+.local, .Envios{
+    display: inline-block;
+    font-size: 13px;
+    font-family: sans-serif;
+}
+.busqueda{
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+   
+}
+#buscar{
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    width: 390px;
+    margin-left: 21px;
+    margin-right: 0px;
+    padding-right: 0px;
+    border: solid #555 1px;
+    color: #555;
+    display: inline-block;
+}
+#buscar::placeholder{
+    padding-left: 10px;
+}
+#imgBuscar{
+    width: 30px;
+    position: relative;
+    top: 6px;
+}
+#imgFlechaDerecha{
+    display: inline-block;
+    position: relative;
+    top: 18px;
+    left: -50px;
+    border-radius: 100px;
+}
+
+
+.backgroundImgBuscar{
+    background-color: #1e72d2;
+    width: 30px;
+    height: 42px;
+    display: inline-block;
+    position: relative;
+    border-radius: 3px; 
+    border-top-right-radius: 0px ;
+    left: 29px;
+    top: 4px;
+    z-index: 1;
+}
+.buscador{
+    display: inline-block;
+    position: relative;
+    margin-right: 0px;
+    padding-right: 0px;
+
+}
+
+#enunciado {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 150%;
+    color: #1e72d2;
+}
+
+.login{
+    border-left: solid 2px hsl(212, 75%, 47%);
+    display: inline-block;
+    position: relative;
+    right: 0px;
+    height: 50px;
+    top: 14px;   
+}
+#cuenta,  #carrito{
+    width: 40px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+
+nav {
+    color: #fff;
+    position: relative;
+    background-color: #1e72d2;
+    padding: 10px;
+    left: 0px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav li {
+    font-size: 150%;
+    margin-left: 20px;
+    display: inline-block;
+}
+.loginMobile{
+    display: none;
+}
+.contenedorProductos{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    color: #333;
+}
+
+.producto{
+    margin: 15px 5px;
+    border-radius: 10px;
+    max-width: 200px;
+    border: solid 1px #1e72d2; 
+    padding: 36px;
+    background-color: #8888880c;
+}
+
+.nombreProducto{
+    color: #444;
+    font-size: 18px;
+    font-family: monospace;
+    font-weight: 300;
+}
+
+.precioProducto{
+    font-size: 18px;
+    color: rgb(1, 150, 88);
+    margin: 0px;
+}
+
+.descripcion{
+    margin-top: 0px;
+}
+.classInputCantidad{
+    width: 40px;
+    margin-left: 10px;
+}
+
+.btnAagregar{
+    text-align: center;
+    border: solid 2px #1e72d2;
+    background: none;
+    padding: 10px 60px;
+    margin-left: 10px;
+    margin-top: 20px;
+    color:#1e72d2;
+    font-size: 20px;
+    border-radius: 13px;
+}
+
+#imgMenu{
+    display: none;
+}
+footer{
+    background-color: #222;
+    color: #85edff;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    min-height: 100px;
+    padding-top:15px;
+}
+#spanCreador,#derechos{
+    display: block;
+    margin-top: 10px ;
+    font-size: 19px;
+    text-align: center;
+}
+#derechos{
+    margin-top: 15px;
+}
+footer ul{
+    list-style: circle;
+}
+.enunciados{
+    display: inline-block;
+}
+#buscarCelular{
+    display: none;
+}
+
+.modalBackground{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #0c083680;
+    backdrop-filter: blur(3px);
+    display: none;
+    
+}
+
+.modal{
+    width: 300px;
+    margin: auto;
+    background-color: #fff;
+    min-height: 400px;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 1;
+}
+#enunciadoModal{
+    text-align: center;
+    color: #1e72d2;
+    margin-top: 20px;
+}
+#mensaje{
+    color: "222";
+    font-size: 20px;
+}
+
+.modal label{
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+}
+
+.inputsZonaEntrega{
+    margin-left: 55px;
+    padding: 10px;
+
+}
+.contenedorInputsZonaEntrega{
+    margin-top: 30px;
+}
+#enunciadoZonaEntrega{
+    text-align: center;
+    margin-top: 40px;
+    color: #1e72d2;
+}
+#btnGuardar{
+    margin-left: 90px;
+    margin-top: 30px;
+    padding: 10px 30px;
+    border-radius: 6px;
+    border: #1e72d2 solid 2px;
+    color: #1e72d2;
+    background-color: none;
+}
+
+#loade-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding-bottom: 40px;
+}
+.loader{
+    border:9px double #f3f3f3;
+    border-top: 8px solid #1e72d2;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin{
+    0%{ transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+@keyframes aparecer{
+    from{
+        opacity: 0;
+        display: none;
+        z-index: 0;
+    }
+    to{
+        opacity: 1;
+        display: flex;
+        z-index: 1;
+
+    }
+}
+
+@keyframes desaparecer{
+    from{
+        opacity: 1;
+        display: flex;
+        z-index: 0;
+    }
+    to{
+        opacity: 0;
+        display: none;
+        z-index: 1;
+    }
+}
+
+@media(width<= 1222px) {
+    .buscador{
+        display: block;
+        margin-left: 0px;
+    }
+    #buscar{
+        width: 90%;
+        margin-left: 0px;
+    }
+    #imgFlechaDerecha{
+     left: 89.8%;
+     top: -44px;
+    }
+    #imgMenu{
+        display: inline-block;
+        position: absolute;
+       right: 10px;
+    }
+    ul{
+        display: inline-block;
+        margin-top: 10px;
+    }
+    nav{
+        height: 40px;
+        top: -56px;
+    }
+    .login{
+        display: none;
+    }
+    
+    .contenedorProductos{
+        padding-top: 40px;
+    }
+    
+    .loginMobile{
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+        right: 85px;
+    }
+    .local,.Envios{
+        display: none ;
+    }
+    #enunciado{
+        text-align: center;
+        display: inline-block;
+        position: relative;
+        left: -30px;
+
+    }
+    .enunciados{
+        display: block;
+        text-align: center;
+    }
+    #logo{
+        margin-left: -30px;
+    }
+}
+
+@media(width<=560px){
+    #cuenta{
+        display: none;
+    }
+    .loginMobile{
+        right: 60px;
+        top: 7px ;
+    }
+    .buscador{
+        display: block;
+        left: -4%;
+        width: 100%;
+
+    }
+    #buscar{
+        width: 89.0%;
+        margin-left: 0px;
+    }
+    #buscar::placeholder{
+        text-align: center;
+    }
+    #imgFlechaDerecha{
+        left: 80%;
+    }
+   
+}
+
+@media(width<=400px){
+    .buscador{
+        display: none;
+        background-color: #1e72d2;
+    }
+    header #imgFlechaDerecha {
+     display: none;  
+    }
+    .enunciados{
+        position: relative;
+        top: -10px;
+        left: 16px;
+        z-index: 1;
+    }
+    nav{
+        top:-80px;
+    }
+    .barraNavSuperior{
+        height: 120px;
+    }
+    #buscarCelular{
+        display: inline-block;
+        position: absolute;
+        right: 97px;
+        top: 15px;
+
+    }
+    #carrito{
+        position: relative;
+        top: 4px;
+    }
+    #buscarCelular,#carrito{
+        width: 32px;
+       
+    }
+    ul{
+        font-size: 13px;
+    }
+}

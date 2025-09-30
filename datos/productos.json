@@ -1,0 +1,15 @@
+{
+    "Lombrices": ["../img/productos/Lombrices.jpg","bolsa de 100 g de Lombrices","1500"],
+    "Morena": ["../img/productos/Lombrices.jpg","descripción","3000","1800"],
+    "Cascara": ["../img/productos/Lombrices.jpg","mejor calidad","3200","1800"],
+    "Anguila": ["../img/productos/Lombrices.jpg","descripción","4800","2900"],
+    "Sábalo": ["../img/productos/Lombrices.jpg","descripción","3200","1800"],
+    "Mojarra": ["../img/productos/Lombrices.jpg","Paquete 500g","1000"],
+    "Riles": ["../img/productos/Lombrices.jpg","A elección ","20.000"],
+    "anzuelos": ["../img/productos/Lombrices.jpg","Todas las medidas","1800"],
+    "Caña de Pescar": ["../img/productos/Lombrices.jpg","descripción","30.000"],
+    "Lider de Pesca":["../img/productos/Lombrices.jpg","cada unidad","800"],
+    "lineas para pescar":["../img/productos/Lombrices.jpg","lineas ultra resistentes de cualquier diámetro X 100 M","5000"],
+    "Señuelos para pesca":["../img/productos/Lombrices.jpg","descripcion","1000"]
+
+}

@@ -1,12 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilos.css">
     <title>Inicio</title>
+
 </head>
+
 <body>
+
+    <div class="modalBackground">
+        <div class="modal">
+        </div>
+    </div>
     
-    
+    <!--- barra de navegación -->
+    <header>
+        <div class="barraNavSuperior">
+            <div class="enunciados">
+                <h3 id="enunciado">𝓛𝓸𝓬𝓸𝓼 𝓧 𝓛𝓪 𝓟𝓮𝓼𝓬𝓪</h3>
+                <img src="./img/logo.png" id="logo" alt="">
+
+            </div>
+
+            <div class="local">
+                <img src="" alt="">
+                <h3>Tienda:</h3>
+                <a href="#">Florencia, Santa Fe</a>
+            </div>
+            <div class="Envios">
+                <img src="" id="EnvioDomicilio" alt="">
+                <h3>Envios a domicilio:</h3>
+                <a href="#" id="zonaDeEntrega">Elegir zona de entrega:</a>
+            </div>
+
+
+            <div class="buscador">
+                <div class="busqueda backgroundImgBuscar">
+                    <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
+                </div>
+                <input class="busqueda" id="buscar" placeholder="¿Qué Buscas Hoy ?" type="text">
+
+            </div>
+            <img src="./img/imgFlechaDerecha.png" id="imgFlechaDerecha" alt="">
+
+            <div class="login">
+                <img src="./img/imgCuenta.png" id="cuenta" alt="">
+                <img src="./img/imgCarrito.png" id="carrito" alt="">
+            </div>
+
+        </div>
+        <nav>
+            <ul>
+                <li><span>Inicio</span></li>
+                <li><span>Nosotros</span></li>
+            </ul>
+            <div class="loginMobile">
+                <img src="./img/imgCuentaBlanco.png" id="cuenta" alt="">
+                <img src="./img/imgCarritoBlanco.png" id="carrito" alt="">
+            </div>
+            <img src="./img/imgBuscar.png" id="buscarCelular" alt="">
+            <img src="./img/imgMenu.png" id="imgMenu" alt="">
+        </nav>
+    </header>
+    <!--- contenido Principal-->
+    <div class="contenedorProductos">
+        <!--productos-->
+        <!--animación de carga de productos-->
+        <div id="loader-wrapper">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!---pie de pagina-->
+    <footer>
+        <div class="fundador">
+            <h3>Fundador</h3>
+            <li><span>Nahuel Stangaferro</span></li>
+        </div>
+        <div class="coFundadores">
+            <h3>Co-Fundadores:</h3>
+            <ul>
+                <li><span>Adán Ledesma</span></li>
+                <li><span>Alan Suarez</span></li>
+                <li><span>Lautaro De Martin</span></li>
+            </ul>
+
+        </div>
+        <ul>
+            <li><span id="spanCreador">Sitio Web Desarrollado y diseñado por Adán Ledesma</span></li>
+            <li><span id="derechos">Todos los derechos reservados a los propietarios</span></li>
+        </ul>
+
+
+    </footer>
+
+    <script src="js/principal.js"></script>
 </body>
+
 </html>
