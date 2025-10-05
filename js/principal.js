@@ -1,3 +1,4 @@
+
 //Base de datos indexedDB
 const IDbRequest = indexedDB.open('LocosXLaPesca', 1);
 
@@ -72,8 +73,26 @@ const getIDBData = (seccion, mode) => {
 
 //Variables globales
 var localidad, codigoPostal, provincia, domicilio, keyUbicacion;
-var productos ={};
 
+//productos
+const productos = {
+    carnadas: {
+        Lombrices: ["../img/productos/Lombrices.jpg", "bolsa de 100 g de Lombrices","1800"],
+        Morena: ["../img/productos/Lombrices.jpg", "descripción", "3000"],
+        Cascara: ["../img/productos/Lombrices.jpg", "mejor calidad", "3200"],
+        Anguila: ["../img/productos/Lombrices.jpg", "descripción", "4800"],
+        Sábalo: ["../img/productos/Lombrices.jpg", "descripción", "3200"],
+        Mojarra: ["../img/productos/Lombrices.jpg", "Paquete 500g","1500"],
+    },
+    articulosPesca: {
+        Riles: ["../img/productos/Lombrices.jpg", "A elección ", "20.000"],
+        anzuelos: ["../img/productos/Lombrices.jpg", "Todas las medidas", "1800"],
+        Caña_de_Pescar: ["../img/productos/Lombrices.jpg", "descripción", "30.000"],
+        Lider_de_Pesca: ["../img/productos/Lombrices.jpg", "cada unidad", "800"],
+        lineas_para_pescar: ["../img/productos/Lombrices.jpg", "lineas ultra resistentes de cualquier diámetro X 100 M", "5000"],
+        Señuelos_para_pesca: ["../img/productos/Lombrices.jpg", "descripcion", "1000"],
+    }
+}
 
 //escucha de eventos 
 document.getElementById('zonaDeEntrega').addEventListener('click', e => {
@@ -86,12 +105,55 @@ document.getElementById('zonaDeEntrega').addEventListener('click', e => {
         modificarZonaDeEntrega()
     }
 })
-
-window.addEventListener('load', () => {
-    cargarLugarDeEntrega()
-    cargarProductos()
+document.getElementById('btnCargarCarnadas').addEventListener('click', () => {
+    cargarProductos('carnadas');
+    history.pushState({sitioActual:"carnadas"},'', '#carnadas')
+  
 })
 
+document.getElementById('btnCargarArticulosPesca').addEventListener('click', () => {
+    cargarProductos('articulosPesca');
+    history.pushState({sitioActual:"articulosPesca"},'', '#articulosPesca')
+
+})
+window.addEventListener('load', () => {
+    cargarLugarDeEntrega()
+    history.replaceState({sitioActual:'inicio'},'','/')
+})
+
+//guardar estado de la página
+const guardarEstado=()=>{
+    const contenido=document.querySelector('.documento').innerHTML;
+    sessionStorage.setItem('contenidoDiv',contenido);
+}
+
+window.addEventListener('popstate',(e)=>{
+    state= e.state;
+    console.log(e.state)
+    if(e.state== null || e.state.sitioActual=='inicio'){
+        console.log('pass')
+        history.replaceState({sitioActual:'inicio'},'','/')
+       location.reload()
+    }
+    if(e.state.sitioActual=='carnadas'){
+        cargarProductos('carnadas');
+        console.log('pass2')
+        history.pushState({sitioActual:"carnadas"},'', '#carnadas')
+    }
+    if(e.state.sitioActual=='articulosPesca'){
+        cargarProductos('articulosPesca');
+        console.log('pass3')
+        history.pushState({sitioActual:"articulosPesca"},'', '#articulosPesca')
+    }
+
+})
+
+document.getElementById('lugarDespacho').addEventListener('click',e=>{
+    e.preventDefault();
+    abrirModal('mapaLugarDespacho')
+
+   
+})
 
 //funciones del header
 
@@ -105,7 +167,7 @@ const cargarLugarDeEntrega = () => {
             keyUbicacion = dato[0][0];
 
             let labelDireccionDeEntrega = document.getElementById('zonaDeEntrega');
-            if (domicilio.length > 20) {
+            if (domicilio.length > 18) {
                 labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ...`
             } else {
                 labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ${provincia}`
@@ -233,75 +295,111 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
             contenedorInputs.appendChild(inputDomicilio);
             modal.appendChild(contenedorInputs)
             modal.appendChild(button);
-            window.scroll({ top: 0 , behavior:'smooth' })
+            window.scroll({ top: 0, behavior: 'smooth' })
             bgModal.style.animation = 'aparecer 0.2s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
-        }else if (tipoDeApertura == 'mensaje') {
+        } else if (tipoDeApertura == 'mensaje') {
             let htmlCode = `
             <h2 id="tituloMensaje">${titulo}</h2>
             <h3 id="mensajeModal">${mensaje}</h3>
             `
-    
-            window.scroll({ top: 0 , behavior:'smooth' })
-            modal.innerHTML=htmlCode;
+
+            window.scroll({ top: 0, behavior: 'smooth' })
+            modal.innerHTML = htmlCode;
             bgModal.style.animation = 'aparecer 0.2s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
-    
+
+        }else if(tipoDeApertura=='mapaLugarDespacho'){
+            let htmlCode = `
+            <h2 id="tituloMensajeDespacho">Lugar de despacho:</h2>
+             <img id="imgMapaDespacho" src="../img/mapaLugarDespacho.png" width="300px" alt="">
+            `
+
+            window.scroll({ top: 0, behavior: 'smooth' })
+            modal.innerHTML = htmlCode;
+            document.getElementById('imgMapaDespacho').addEventListener('click',()=>{
+                window.open(document.getElementById('imgMapaDespacho').src)
+            })
+            bgModal.style.animation = 'aparecer 0.2s forwards'
+            bgModal.style.display = 'flex';
+            body.style.overflow = 'hidden';
+
         }
 
-    }else {
+    } else {
         console.log('Errror al abrir modal: no se definio el tipo de apertura')
     }
 
 }
 
-//Función para cargar los productos
-const cargarProductos = async () => {
-    await fetch('../datos/productos.json')
-        .then(dato => dato.json())
-        .then(dato => {
-            const contenedorProductos = document.querySelector('.contenedorProductos');
-            contenedorProductos.innerHTML=''
-            for (let nombreProducto in dato) {
-                productos.nombreProducto=[nombreProducto[0],nombreProducto[1],nombreProducto[2] ]
+//funcion para mostrar las areas 
+const mostrarAreas=()=>{
+    const contenedorProductos= document.querySelector('.contenedorProductos');
+    const divElegirArea = document.querySelector('.elegirArea');
 
-                const producto=document.createElement('DIV');
-                const img =document.createElement('IMG');
-                const nombreDelProducto= document.createElement('H3');
-                const descripcionProducto= document.createElement('P');
-                const precioProducto= document.createElement('P');
-                const labelCantidad= document.createElement('LABEL');
-                const inputCantidad= document.createElement('INPUT');
-                const btnAgregar= document.createElement('BUTTON');
-                
+    contenedorProductos.style.animation='desaparecerArea 0.6s forwards'
+    divElegirArea.style.animation='aparecerArea 0.6s forwards';
+}
+
+//Función para cargar los productos
+const cargarProductos = (areaACargar) => {
+
+    const contenedorProductos = document.querySelector('.contenedorProductos');
+    const divElegirArea = document.querySelector('.elegirArea')
+    divElegirArea.style.animation='desaparecerArea 0.6s forwards'
+
+    contenedorProductos.style.animation=''
+
+    window.scroll({top:0, behavior:"smooth"}) 
+    contenedorProductos.innerHTML = '';
+    
+    for (let area in productos) {
+        if (areaACargar == area) {
+            for (let nombreProducto in productos[area]) {
+                if (nombreProducto.includes('_')){
+                    nombreProductoFormateado = nombreProducto.replaceAll('_',' ');
+                    console.log('pass')
+                }else{
+                    nombreProductoFormateado= nombreProducto;
+                }
+
+                const producto = document.createElement('DIV');
+                const img = document.createElement('IMG');
+                const nombreDelProducto = document.createElement('H3');
+                const descripcionProducto = document.createElement('P');
+                const precioProducto = document.createElement('P');
+                const labelCantidad = document.createElement('LABEL');
+                const inputCantidad = document.createElement('INPUT');
+                const btnAgregar = document.createElement('BUTTON');
+
                 producto.classList.add('producto');
-            
-                img.id='imgProducto';
-                img.style.width='200px';
-                img.src=dato[nombreProducto][0]
-            
+
+                img.id = 'imgProducto';
+                img.style.width = '200px';
+                img.src = productos[area][nombreProducto][0]
+
                 nombreDelProducto.classList.add('nombreProducto');
-                nombreDelProducto.textContent=nombreProducto;
-            
-                descripcionProducto.className='descripcion';
-                descripcionProducto.textContent=dato[nombreProducto][1]
-            
-                precioProducto.className='precioProducto';
-                precioProducto.textContent=dato[nombreProducto][2]
-            
-                labelCantidad.setAttribute('for','cantidad');
-                labelCantidad.textContent='Cantidad';
-            
-                inputCantidad.setAttribute('type','number');
-                inputCantidad.setAttribute('name','cantidad');
-                inputCantidad.className='classInputCantidad';
-                inputCantidad.id='inputCantidad';
-            
-                btnAgregar.className='btnAagregar';
-                btnAgregar.textContent='Añadir';
-                btnAgregar.addEventListener('click',()=>{
+                nombreDelProducto.textContent = nombreProductoFormateado;
+
+                descripcionProducto.className = 'descripcion';
+                descripcionProducto.textContent = productos[area][nombreProducto][1]
+
+                precioProducto.className = 'precioProducto';
+                precioProducto.textContent = productos[area][nombreProducto][2]
+
+                labelCantidad.setAttribute('for', 'cantidad');
+                labelCantidad.textContent = 'Cantidad';
+
+                inputCantidad.setAttribute('type', 'number');
+                inputCantidad.setAttribute('name', 'cantidad');
+                inputCantidad.className = 'classInputCantidad';
+                inputCantidad.id = 'inputCantidad';
+
+                btnAgregar.className = 'btnAagregar';
+                btnAgregar.textContent = 'Añadir';
+                btnAgregar.addEventListener('click', () => {
                     console.log('listo')
                 })
 
@@ -312,7 +410,9 @@ const cargarProductos = async () => {
                 producto.appendChild(labelCantidad);
                 producto.appendChild(inputCantidad);
                 producto.appendChild(btnAgregar);
+
                 contenedorProductos.appendChild(producto);
             }
-        })       
+        }
+    }
 }

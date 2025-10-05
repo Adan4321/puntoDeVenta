@@ -27,8 +27,9 @@
 
             <div class="local">
                 <img src="" alt="">
-                <h3>Tienda:</h3>
-                <a href="#">Florencia, Santa Fe</a>
+                <h3>Lugar de despacho:</h3>
+                <a href="" id="lugarDespacho">Florencia, Santa Fe</a>
+                
             </div>
             <div class="Envios">
                 <img src="" id="EnvioDomicilio" alt="">
@@ -54,7 +55,7 @@
         </div>
         <nav>
             <ul>
-                <li><span>Inicio</span></li>
+                <li onclick="mostrarAreas()"><span>Inicio</span></li>
                 <li><span>Nosotros</span></li>
             </ul>
             <div class="loginMobile">
@@ -66,13 +67,44 @@
         </nav>
     </header>
     <!--- contenido Principal-->
-    <div class="contenedorProductos">
-        <!--productos-->
-        <!--animación de carga de productos-->
-        <div id="loader-wrapper">
-            <div class="loader"></div>
+    <div class="documento">
+    <div class="elegirArea">
+        <h1 align="center">¿Qué estás buscando?</h1>
+        <div class="opciones">
+        <div class="targetaDeSeleccion">
+            <h3>Carnadas</h3>
+            <ul>
+                <li>Carnadas de primera calidad</li>
+                <li>Mejor Precio</li>
+                <li>Envios ultra rápidos</li>
+            </ul>    
+            <button id="btnCargarCarnadas">Ver más</button>        
         </div>
+
+        <div class="targetaDeSeleccion">
+            <h3>Articulos de pesca</h3>
+            <ul>
+                <li>Cañas de pescar</li>
+                <li>Líneas de pesca</li>
+                <li>Riles de pesca</li>
+                <li>Señuelos para pescar</li>
+            </ul>
+            <button id="btnCargarArticulosPesca">Ver más</button>
+        </div>
+        </div>
+
+
+        
     </div>
+    <div class="contenedorProductos">
+        <!--productos y eleccion de productos-->
+        <!--animación de carga de productos-->
+        <!-- <div id="loader-wrapper">
+            <div class="loader"></div>
+        </div> -->
+        
+    </div>
+</div>
 
     <!---pie de pagina-->
     <footer>
@@ -97,7 +129,7 @@
 
     </footer>
 
-    <script src="js/principal.js"></script>
+    <script src="./js/principal.js"></script>
 </body>
 
 </html>

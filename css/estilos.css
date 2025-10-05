@@ -26,6 +26,7 @@ header {
     width: 100%;
     background-color: #fff;
     height: 20%;
+    z-index: 9999;
 
 }
 
@@ -315,6 +316,54 @@ footer ul{
     height: 60px;
     animation: spin 1.5s linear infinite;
 }
+.elegirArea h1{
+    color: #4e1ed2;
+}
+.opciones{
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.targetaDeSeleccion{
+    padding: 30px;
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    border: solid #1e72d2 2px;
+    margin: 10px;
+    
+}
+
+.targetaDeSeleccion:hover{
+    padding: 35px;
+    border: #21be68 solid 2px;
+    transition: 0.3s;
+}
+.targetaDeSeleccion h3{
+    text-align: center;
+    color: #222;
+    margin-bottom: 10px;
+}
+.targetaDeSeleccion ul{
+    margin-top: 60px;
+    font-size: 20px;
+    font-family: sans-serif;
+
+}
+.targetaDeSeleccion button{
+    position: relative;
+    top: 90px;
+    left: 40px;
+    padding: 10px 30px;
+    background: none;
+    border: #1e72d2 solid 2px ;
+    border-radius: 10px;
+}
+.targetaDeSeleccion button:hover{
+    border: solid #21be68 2px ;
+}
+
 
 @keyframes spin{
     0%{ transform: rotate(0deg);}
@@ -335,6 +384,32 @@ footer ul{
     }
 }
 
+@keyframes aparecerArea{
+    from{
+        display: none;
+        opacity: 0;
+    }
+    to{
+        display: block;
+        opacity: 1;
+    }
+}
+
+@keyframes desaparecerArea {
+    fron{
+        opacity: 1;
+        height: 100vh;
+       
+    }
+    to{
+       
+        height: 0;
+        opacity: 0;
+        display: none;
+       
+    }
+    
+}
 @keyframes desaparecer{
     from{
         opacity: 1;
@@ -406,10 +481,19 @@ footer ul{
         margin-left: -30px;
     }
 }
+#tituloMensajeDespacho{
+    color: #1e72d2;
+    text-align: center;
+    
+}
 
 @media(width<=560px){
     #cuenta{
         display: none;
+    }
+    .targetaDeSeleccion:hover{
+        border:none;
+        padding: 30px;;
     }
     .loginMobile{
         right: 60px;
