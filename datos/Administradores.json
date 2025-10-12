@@ -1,6 +1,7 @@
 {
-   "Adan Ledesma":"L3301",
-   "Nahuel Gimenez":"1234",
-   "Alan Suarez":"4321",
-   "Lautaro De Martin":"2341"
+   "Adán Ledesma":["L3301","../img/fondo1.jpg"],
+   "Nahuel Gimenez":["1234","../img/fondo1.jpg"],
+   "Alan Suarez":["4321","../img/fondo1.jpg"],
+   "Lautaro De Martin":["2341","../img/fondo1.jpg"],
+   "Demo":["demo","../img/fondo1.jpg"]
 }

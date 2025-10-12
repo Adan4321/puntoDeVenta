@@ -1,5 +1,3 @@
-
-
 h1,
 h3,
 label,
@@ -13,24 +11,25 @@ body {
     padding: 0;
 
 }
-body{
+
+body {
     padding-top: 150px;
     font-family: sans-serif;
     position: relative;
-    
+
 }
 
 header {
     position: fixed;
-    top: 0px;  
+    top: 0px;
     width: 100%;
     background-color: #fff;
     height: 20%;
-    z-index: 9999;
+    z-index: 9000;
 
 }
 
-.barraNavSuperior{
+.barraNavSuperior {
     padding: 10px;
     position: relative;
 }
@@ -42,28 +41,35 @@ header {
     top: 10px;
     display: inline-block;
 }
-.local{
+
+.local {
     margin-left: 2%;
 }
-.Envios{
+
+.Envios {
     margin-left: 9px;
 
 }
-.local, .Envios{
+
+.local,
+.Envios {
     display: inline-block;
     font-size: 13px;
     font-family: sans-serif;
 }
-.busqueda{
+
+.busqueda {
     display: inline-block;
     position: relative;
     max-width: 100%;
-   
+
 }
-#buscar{
+
+#buscar {
     height: 30px;
     border-radius: 5px;
     padding: 5px;
+    padding-left: 10px;
     font-size: 16px;
     width: 390px;
     margin-left: 21px;
@@ -73,15 +79,18 @@ header {
     color: #555;
     display: inline-block;
 }
-#buscar::placeholder{
+
+#buscar::placeholder {
     padding-left: 10px;
 }
-#imgBuscar{
+
+#imgBuscar {
     width: 30px;
     position: relative;
     top: 6px;
 }
-#imgFlechaDerecha{
+
+#imgFlechaDerecha {
     display: inline-block;
     position: relative;
     top: 18px;
@@ -90,19 +99,20 @@ header {
 }
 
 
-.backgroundImgBuscar{
+.backgroundImgBuscar {
     background-color: #1e72d2;
     width: 30px;
     height: 42px;
     display: inline-block;
     position: relative;
-    border-radius: 3px; 
-    border-top-right-radius: 0px ;
+    border-radius: 3px;
+    border-top-right-radius: 0px;
     left: 29px;
     top: 4px;
     z-index: 1;
 }
-.buscador{
+
+.buscador {
     display: inline-block;
     position: relative;
     margin-right: 0px;
@@ -117,15 +127,17 @@ header {
     color: #1e72d2;
 }
 
-.login{
+.login {
     border-left: solid 2px hsl(212, 75%, 47%);
     display: inline-block;
     position: relative;
     right: 0px;
     height: 50px;
-    top: 14px;   
+    top: 14px;
 }
-#cuenta,  #carrito{
+
+#cuenta,
+#carrito {
     width: 40px;
     margin-left: 10px;
     margin-top: 5px;
@@ -149,10 +161,12 @@ nav li {
     margin-left: 20px;
     display: inline-block;
 }
-.loginMobile{
+
+.loginMobile {
     display: none;
 }
-.contenedorProductos{
+
+.contenedorProductos {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -161,80 +175,99 @@ nav li {
     color: #333;
 }
 
-.producto{
+.producto {
+    position: relative;
     margin: 15px 5px;
     border-radius: 10px;
     max-width: 200px;
-    border: solid 1px #1e72d2; 
+    border: solid 1px #1e72d2;
     padding: 36px;
     background-color: #8888880c;
 }
+.producto button:hover {
+    background: #b4b4b4;
+    color: #1e72d2;
+}
 
-.nombreProducto{
+.nombreProducto {
     color: #444;
     font-size: 18px;
     font-family: monospace;
     font-weight: 300;
 }
 
-.precioProducto{
+.precioProducto {
     font-size: 18px;
     color: rgb(1, 150, 88);
     margin: 0px;
 }
 
-.descripcion{
+.descripcion {
     margin-top: 0px;
+    height: 80px;
+    word-wrap: break-word;
+    
+
 }
-.classInputCantidad{
-    width: 40px;
-    margin-left: 10px;
+::-webkit-scrollbar{
+display: none;
+}
+#btnVerMas{
+    color: blueviolet;
+    cursor:pointer;
 }
 
-.btnAagregar{
+.btnAagregar {
     text-align: center;
     border: solid 2px #1e72d2;
     background: none;
     padding: 10px 60px;
     margin-left: 10px;
     margin-top: 20px;
-    color:#1e72d2;
+    color: #1e72d2;
     font-size: 20px;
     border-radius: 13px;
 }
 
-#imgMenu{
-    display: none;
-}
-footer{
-    background-color: #222;
-    color: #85edff;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    min-height: 100px;
-    padding-top:15px;
-}
-#spanCreador,#derechos{
-    display: block;
-    margin-top: 10px ;
-    font-size: 19px;
-    text-align: center;
-}
-#derechos{
-    margin-top: 15px;
-}
-footer ul{
-    list-style: circle;
-}
-.enunciados{
-    display: inline-block;
-}
-#buscarCelular{
+#imgMenu {
     display: none;
 }
 
-.modalBackground{
+footer {
+    background-color: #222;
+    color: #fff;
+    min-height: 50px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+#spanCreador,
+#derechos {
+    display: block;
+    margin-top: 10px;
+    font-size: 15px;
+    
+}
+
+#derechos {
+    margin-top: 15px;
+    text-align: center;
+}
+
+footer ul {
+    list-style: circle;
+}
+
+.enunciados {
+    display: inline-block;
+}
+
+#buscarCelular {
+    display: none;
+}
+
+.modalBackground {
+    padding-top: 30px;
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -244,10 +277,10 @@ footer ul{
     background-color: #0c083680;
     backdrop-filter: blur(3px);
     display: none;
-    
+
 }
 
-.modal{
+.modal {
     width: 300px;
     margin: auto;
     background-color: #fff;
@@ -257,37 +290,42 @@ footer ul{
     padding: 15px;
     z-index: 1;
 }
-#enunciadoModal{
+
+#enunciadoModal {
     text-align: center;
     color: #1e72d2;
     margin-top: 20px;
 }
-#mensaje{
+
+#mensaje {
     color: "222";
     font-size: 20px;
 }
 
-.modal label{
+.modal label {
     display: block;
     text-align: center;
     margin-top: 10px;
     color: #333;
 }
 
-.inputsZonaEntrega{
+.inputsZonaEntrega {
     margin-left: 55px;
     padding: 10px;
 
 }
-.contenedorInputsZonaEntrega{
+
+.contenedorInputsZonaEntrega {
     margin-top: 30px;
 }
-#enunciadoZonaEntrega{
+
+#enunciadoZonaEntrega {
     text-align: center;
     margin-top: 40px;
     color: #1e72d2;
 }
-#btnGuardar{
+
+#btnGuardar {
     margin-left: 90px;
     margin-top: 30px;
     padding: 10px 30px;
@@ -308,75 +346,352 @@ footer ul{
     z-index: 9999;
     padding-bottom: 40px;
 }
-.loader{
-    border:9px double #f3f3f3;
+
+.loader {
+    border: 9px double #f3f3f3;
     border-top: 8px solid #1e72d2;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     animation: spin 1.5s linear infinite;
+
+
 }
-.elegirArea h1{
+
+.notificacion {
+    position: absolute;
+    padding: 20px 100px;
+    z-index: 9999;
+    right: 40px;
+    max-width: 200px;
+
+    top: 180px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #0454afb7;
+    backdrop-filter: blur(3px);
+    border-radius: 30px;
+
+}
+
+.elegirArea h1 {
     color: #4e1ed2;
 }
-.opciones{
+
+.opciones {
     display: flex;
     margin-top: 30px;
     justify-content: center;
     flex-wrap: wrap;
 }
-.targetaDeSeleccion{
+
+.targetaDeSeleccion {
     padding: 30px;
     width: 200px;
     height: 300px;
     border-radius: 10px;
     border: solid #1e72d2 2px;
     margin: 10px;
-    
+
 }
 
-.targetaDeSeleccion:hover{
-    padding: 35px;
-    border: #21be68 solid 2px;
-    transition: 0.3s;
-}
-.targetaDeSeleccion h3{
+.targetaDeSeleccion h3 {
     text-align: center;
     color: #222;
     margin-bottom: 10px;
 }
-.targetaDeSeleccion ul{
-    margin-top: 60px;
+
+.targetaDeSeleccion ul {
+    margin-top: 30px;
     font-size: 20px;
     font-family: sans-serif;
+    height: 180px;
 
 }
-.targetaDeSeleccion button{
+
+.targetaDeSeleccion button {
     position: relative;
-    top: 90px;
+    top: 10px;
     left: 40px;
     padding: 10px 30px;
     background: none;
-    border: #1e72d2 solid 2px ;
+    border: #1e72d2 solid 2px;
     border-radius: 10px;
 }
-.targetaDeSeleccion button:hover{
-    border: solid #21be68 2px ;
+
+.targetaDeSeleccion button:hover {
+    background: #b4b4b4;
+    color: #1e72d2;
+}
+
+#btnCerrarMapa {
+    margin-left: 98px;
+    margin-top: 20px;
+    border: #1e72d2 2px solid;
+    background: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+}
+
+.menuCuentaPc {
+    position: absolute;
+    display: none;
+    background-color: #13427780;
+    border: #134277cb solid 4px;
+    border-top: solid 12px #134277cb;
+    width: 160px;
+    height: 200px;
+    z-index: 9999;
+    top: 64px;
+    right: 0px;
+    color: #fff;
+    border-radius: 7px;
+    backdrop-filter: blur(3px);
+    padding-top: 10px;
+    transition: all 1s;
+    animation: aparecerArea 0.5s forwards;
+
+}
+
+.menuCuentaPc::before {
+    position: absolute;
+    content: '';
+    top: -30px;
+    left: 122px;
+    transform: translateX(-50px);
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 18px solid #134277;
+}
+
+.menuCuentaPc.active {
+    display: block;
+}
+
+.menuCuentaPc h3 {
+    text-align: center;
+    text-transform: capitalize;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.menuCuentaPc button {
+    border: #1e72d2 solid 1px;
+    background: #000000ef;
+    padding: 7px;
+    left: 32px;
+    margin-top: 15px;
+    color: #1e72d2;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+.menuCuentaPc button:hover {
+    color: #ff0000;
+    border: #d21e1e solid 1px;
+}
+
+.menuCuentaPc button.iniciarSesion:hover {
+    color: #48ff00;
+    border: #1ed287 solid 1px;
+}
+
+#fotoPerfil {
+    width: 70px;
+    border-radius: 50%;
+    position: relative;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.seccionActiva {
+    background-color: rgb(30, 33, 59);
+    border-radius: 50%;
+}
+
+#btnIniciarSesion {
+    position: relative;
+    top: 70px;
+    left: 80px;
+    padding: 10px 30px;
+    background: none;
+    border: #1e72d2 solid 2px;
+    border-radius: 10px;
+}
+
+#btnIniciarSesion:hover {
+    background-color: #999;
+}
+
+#enunciadoIniciarSesion {
+    padding-top: 40px;
+    font-size: 20px;
+    color: #1e72d2;
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: sans-serif;
+
+}
+
+.labelLogin {
+    font-size: 19px;
+    margin-bottom: 10px;
+
+}
+
+.inputsLogin {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+    left: -12px;
+    border: none;
+    border-bottom: solid #1e72d2;
+    outline: none;
+    font-size: 16px;
+
+}
+
+.inputsLogin::placeholder {
+    color: #1e72d2;
+}
+
+.inputsLogin:focus {
+    border-bottom: solid #4be20f;
+}
+
+.contenedorSugerenciasBusqueda {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    height: auto;
+    background: #134277c4;
+    backdrop-filter: blur(3px);
+    margin-top: 2px;
+    width: 90%;
+    left: 30px;
+}
+
+.ulSugerenciasBusqueda {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+.ulSugerenciasBusqueda li{
+    font-size: 19px;
+    font-family: sans-serif;
+    color: #fff;
+    text-shadow: 6px 3px 3px black;
+    cursor: pointer;
+    padding: 8px;
+
+}
+.ulSugerenciasBusqueda li:hover{
+    background-color: #134277;
+    
+}
+
+.contenedorInputCantidad{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 81px;
+    display: inline-block;
+
+}
+.classInputCantidad {
+    width: 16px;
+    border: none;
+   padding: 5px;
+   background: none;
+   text-align: center;
+   -webkit-appearance: none;
+   -moz-appearance: textfield;;
+}
+.classInputCantidad:focus{
+    outline: none;
+    border: none;
+}
+.classInputCantidad::-ms-clear{
+    display: none;
+}
+.classInputCantidad::-webkit-outer-spin-button, .classInputCantidad::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btnControlInput{
+    background:none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    height: 100%;
+}
+.btnControlInput:hover{
+    background-color: #cccccc;
+
 }
 
 
-@keyframes spin{
-    0%{ transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
+
+.tarjetaProducto{
+    margin: 15px 5px;
+    border-radius: 10px;
+    width: 400px;
+    padding: 36px;
+    background-color: #e0e0e0;
+    height: auto;
+}
+.tarjetaProducto h3{
+    text-align: center;
+    font-size: 25px;
+    color: #222;
+    margin-top: 0px;
+    margin-bottom: 20px;
+
+}
+.contenedorInputCantidadAmpliado{
+    display: block;
+    border: 1px solid #1e72d2;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 81px;
+    padding-top: 1px;
+    height: 27px;
+    margin-top: 15px;
+}
+.tarjetaProducto .btnAagregar{
+    margin-left: 110px;
 }
 
-@keyframes aparecer{
-    from{
+.tarjetaProducto img{
+    width: 400px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes aparecer {
+    from {
         opacity: 0;
         display: none;
         z-index: 0;
     }
-    to{
+
+    to {
         opacity: 1;
         display: flex;
         z-index: 1;
@@ -384,176 +699,246 @@ footer ul{
     }
 }
 
-@keyframes aparecerArea{
-    from{
+@keyframes enviarNotificacion {
+    0% {
         display: none;
+        height: 0;
         opacity: 0;
+        padding: 0;
+
     }
-    to{
+
+    100% {
         display: block;
         opacity: 1;
+
+    }
+}
+
+@keyframes ocultarNotificacion {
+    0% {
+        display: block;
+        opacity: 1;
+
+    }
+
+    100% {
+        display: none;
+        opacity: 0;
+        padding-left: 0;
+    }
+}
+
+
+
+@keyframes aparecerArea {
+    from {
+        display: none;
+        height: 0;
+        opacity: 0;
+    }
+
+    to {
+        display: block;
+        opacity: 1;
+
     }
 }
 
 @keyframes desaparecerArea {
-    fron{
+    fron {
         opacity: 1;
         height: 100vh;
-       
+        display: block;
     }
-    to{
-       
+
+    to {
+
         height: 0;
         opacity: 0;
         display: none;
-       
+        overflow: hidden;
+
     }
-    
+
 }
-@keyframes desaparecer{
-    from{
+
+@keyframes desaparecer {
+    from {
         opacity: 1;
         display: flex;
         z-index: 0;
     }
-    to{
+
+    to {
         opacity: 0;
         display: none;
         z-index: 1;
     }
 }
 
-@media(width<= 1222px) {
-    .buscador{
+@media(width<=1332px) {
+    .buscador {
         display: block;
         margin-left: 0px;
     }
-    #buscar{
+
+    #buscar {
         width: 90%;
         margin-left: 0px;
     }
-    #imgFlechaDerecha{
-     left: 89.8%;
-     top: -44px;
+
+    #imgFlechaDerecha {
+        left: 89.8%;
+        top: -44px;
     }
-    #imgMenu{
+
+    #imgMenu {
         display: inline-block;
         position: absolute;
-       right: 10px;
+        right: 10px;
     }
-    ul{
+
+    ul {
         display: inline-block;
         margin-top: 10px;
     }
-    nav{
+
+    nav {
         height: 40px;
         top: -56px;
     }
-    .login{
+
+    .login {
         display: none;
     }
-    
-    .contenedorProductos{
+
+    .contenedorProductos {
         padding-top: 40px;
     }
-    
-    .loginMobile{
+
+    .loginMobile {
         display: inline-block;
         position: absolute;
         top: 5px;
         right: 85px;
     }
-    .local,.Envios{
-        display: none ;
+
+    .local,
+    .Envios {
+        display: none;
     }
-    #enunciado{
+
+    #enunciado {
         text-align: center;
         display: inline-block;
         position: relative;
         left: -30px;
 
     }
-    .enunciados{
+
+    .enunciados {
         display: block;
         text-align: center;
     }
-    #logo{
+
+    #logo {
         margin-left: -30px;
     }
 }
-#tituloMensajeDespacho{
+
+#tituloMensajeDespacho {
     color: #1e72d2;
     text-align: center;
-    
+
 }
 
-@media(width<=560px){
-    #cuenta{
+@media(width<=560px) {
+    #cuenta {
         display: none;
     }
-    .targetaDeSeleccion:hover{
-        border:none;
-        padding: 30px;;
+
+    .targetaDeSeleccion:hover {
+        border: solid 2px #1e72d2;
+        padding: 30px;
     }
-    .loginMobile{
+
+    .targetaDeSeleccion button:hover {
+        border: solid #1e72d2 2px;
+    }
+
+    .loginMobile {
         right: 60px;
-        top: 7px ;
+        top: 7px;
     }
-    .buscador{
+
+    .buscador {
         display: block;
         left: -4%;
         width: 100%;
 
     }
-    #buscar{
+
+    #buscar {
         width: 89.0%;
         margin-left: 0px;
     }
-    #buscar::placeholder{
+
+    #buscar::placeholder {
         text-align: center;
     }
-    #imgFlechaDerecha{
+
+    #imgFlechaDerecha {
         left: 80%;
     }
-   
+
 }
 
-@media(width<=400px){
-    .buscador{
+@media(width<=400px) {
+    .buscador {
         display: none;
         background-color: #1e72d2;
     }
+
     header #imgFlechaDerecha {
-     display: none;  
+        display: none;
     }
-    .enunciados{
+
+    .enunciados {
         position: relative;
         top: -10px;
         left: 16px;
         z-index: 1;
     }
-    nav{
-        top:-80px;
+
+    nav {
+        top: -80px;
     }
-    .barraNavSuperior{
+
+    .barraNavSuperior {
         height: 120px;
     }
-    #buscarCelular{
+
+    #buscarCelular {
         display: inline-block;
         position: absolute;
         right: 97px;
         top: 15px;
 
     }
-    #carrito{
+
+    #carrito {
         position: relative;
         top: 4px;
     }
-    #buscarCelular,#carrito{
+
+    #buscarCelular,
+    #carrito {
         width: 32px;
-       
+
     }
-    ul{
+
+    ul {
         font-size: 13px;
     }
 }
