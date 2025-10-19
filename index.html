@@ -15,7 +15,7 @@
         <div class="modal">
         </div>
     </div>
-    
+
     <!--- barra de navegación -->
     <header>
         <div class="barraNavSuperior">
@@ -27,13 +27,13 @@
 
             <div class="local">
                 <img src="" alt="">
-                <h3>Lugar de despacho:</h3>
+                <h3>Nuestra tienda:</h3>
                 <a href="" id="lugarDespacho">Florencia, Santa Fe</a>
-                
+
             </div>
             <div class="Envios">
                 <img src="" id="EnvioDomicilio" alt="">
-                <h3>Envios a domicilio:</h3>
+                <h3>Tu domicilio:</h3>
                 <a href="#" id="zonaDeEntrega">Elegir zona de entrega:</a>
             </div>
 
@@ -43,9 +43,7 @@
                     <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
                 </div>
                 <input class="busqueda" id="buscar" autocomplete="none" placeholder="¿Qué Buscas Hoy ?" type="text">
-
                 <div class="contenedorSugerenciasBusqueda">
-
                 </div>
 
             </div>
@@ -55,13 +53,13 @@
                 <img src="./img/imgCuenta.png" id="cuenta" alt="">
                 <img src="./img/imgCarrito.png" id="carrito" alt="">
                 <div class="menuCuentaPc">
-                    <img id="fotoPerfil" src="" alt="">
-                    <h3 id="nombreYApellido"></h3>
+                    <img class="fotoPerfil" src="" alt="">
+                    <h3 class="nombreYApellido"></h3>
                     <button class="btnCerrarSesion">Cerrar Sesión</button>
                 </div>
-    
+
             </div>
-            
+
         </div>
         <nav>
             <ul>
@@ -69,60 +67,100 @@
                 <li onclick="sobreNosotros()"><span>Nosotros</span></li>
             </ul>
             <div class="loginMobile">
-                <img src="./img/imgCuentaBlanco.png" id="cuenta" alt="">
-                <img src="./img/imgCarritoBlanco.png" id="carrito" alt="">
+                <img src="./img/imgCuentaBlanco.png" id="cuentaLaptop" alt="">
+                <img src="./img/imgCarritoBlanco.png" id="carritoLaptop" alt="">
+
+                 <div class="menuCuentaLaptop">
+                    <img class="fotoPerfil" src="" alt="">
+                    <h3 class="nombreYApellido"></h3>
+                    <button class="btnCerrarSesionLaptop">Cerrar Sesión</button>
+                </div>
             </div>
             <img src="./img/imgBuscar.png" id="buscarCelular" alt="">
-            <img src="./img/imgMenu.png" id="imgMenu" alt="">
+            <img src="./img/imgMenu.png" class="imgMenu" alt="">
+
+
+            <!-- menu de laptop -->
+            <div class="menuDesplegableLaptop">
+
+                <div class="localLaptop">
+                    <img src="" alt="">
+                    <h3>Nuestra tienda:</h3>
+                    <a href="" class="lugarDespacho">Florencia, Santa Fe</a>
+
+                </div>
+                <div class="EnviosLaptop">
+                    <img src="" id="EnvioDomicilio" alt="">
+                    <h3>Tu domicilio:</h3>
+                    <a href="#" class="zonaDeEntrega">Elegir zona de entrega:</a>
+                </div>
+
+
+            </div>
+            <!-- ------------------------------------- -->
+
+            <div class="menuCelular" style="display:none;">
+                <ul>
+                    <li>
+                        <div class="busqueda backgroundImgBuscar">
+                            <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
+                        </div>
+                        <input class="busqueda" id="buscar" autocomplete="none" placeholder="¿Qué Buscas Hoy ?"
+                            type="text">
+                        <div class="contenedorSugerenciasBusqueda">
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <!--- contenido Principal-->
     <div class="documento">
-    <div class="elegirArea">
-        <h1 align="center">¿Qué estás buscando?</h1>
-        <div class="opciones">
-        <div class="targetaDeSeleccion carnadas">
-            <h3>Carnadas</h3>
-            <ul>
-                <li>Carnadas de primera calidad y variedad</li>
-                <li>Mejor Precio</li>
-                <li>Envíos ultra rápidos</li>
-            </ul>    
-            <button id="btnCargarCarnadas">Ver más</button>        
-        </div>
+        <div class="elegirArea">
+            <h1 align="center">¿Qué estás buscando?</h1>
+            <div class="opciones">
+                <div class="targetaDeSeleccion carnadas">
+                    <h3>Carnadas</h3>
+                    <ul>
+                        <li>Carnadas de primera calidad y variedad</li>
+                        <li>Mejor Precio</li>
+                        <li>Envíos ultra rápidos</li>
+                    </ul>
+                    <button id="btnCargarCarnadas">Ver más</button>
+                </div>
 
-        <div class="targetaDeSeleccion pesca">
-            <h3>Artículos de pesca</h3>
-            <ul>
-                <li>Cañas </li>
-                <li>Líneas</li>
-                <li>Reels</li>
-                <li>Señuelos</li>
-                <li>Anzuelos</li>
-                <li>Lider de pesca</li>
-                <li>Plomadas</li>
-            </ul>
-            <button id="btnCargarArticulosPesca">Ver más</button>
-            
-        </div>
-        </div>
+                <div class="targetaDeSeleccion pesca">
+                    <h3>Artículos de pesca</h3>
+                    <ul>
+                        <li>Cañas </li>
+                        <li>Líneas</li>
+                        <li>Reels</li>
+                        <li>Señuelos</li>
+                        <li>Anzuelos</li>
+                        <li>Lider de pesca</li>
+                        <li>Plomadas</li>
+                    </ul>
+                    <button id="btnCargarArticulosPesca">Ver más</button>
+
+                </div>
+            </div>
 
 
-        
-    </div> 
-    <div class="contenedorProductos">
-        <!--productos y eleccion de productos-->
-        <!--animación de carga de productos-->
-        <!-- <div id="loader-wrapper">
+
+        </div>
+        <div class="contenedorProductos">
+            <!--productos y eleccion de productos-->
+            <!--animación de carga de productos-->
+            <!-- <div id="loader-wrapper">
             <div class="loader"></div>
         </div> -->
 
+        </div>
     </div>
-</div>
 
     <!---pie de pagina-->
     <footer class="footerDefecto footerActivo">
-    
+
         <ul>
             <li><span id="spanCreador">Adán Ledesma ~ 2025 </span></li>
         </ul>

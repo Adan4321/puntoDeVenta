@@ -114,8 +114,8 @@ const productos = {
 }
 
 //escucha de eventos 
-document.getElementById('zonaDeEntrega').addEventListener('click', e => {
-    let labelDireccionDeEntrega = document.getElementById('zonaDeEntrega');
+document.querySelector('.zonaDeEntrega').addEventListener('click', e => {
+    let labelDireccionDeEntrega = document.querySelector('.zonaDeEntrega');
 
     e.preventDefault()
     if (labelDireccionDeEntrega.textContent == 'Elegir zona de entrega:') {
@@ -144,15 +144,14 @@ window.addEventListener('load', () => {
 
 window.addEventListener('click', (e) => {
     const cuenta = document.querySelector('.menuCuentaPc');
+    const cuentaLaptop=document.querySelector('.menuCuentaLaptop');
     const contenedorSugerencias = document.querySelector('.contenedorSugerenciasBusqueda');
-    let imgFotoPerfil = document.getElementById('cuenta')
 
-    if (!e.target.matches('#cuenta') && cuenta.classList.contains('active')) cerrarLogin()
-
+    if (!e.target.matches('#cuenta') && cuenta.classList.contains('active')) cerrarLogin('pc')
+    if (!e.target.matches('#cuentaLaptop') && cuentaLaptop.classList.contains('menuCuentaActivo')) cerrarLogin('laptop')
 
     if (!e.target.matches('.contenedorSugerenciasBusqueda' && contenedorSugerencias.innerHTML != '')) {
         contenedorSugerencias.innerHTML = ''
-
     }
 
 
@@ -179,7 +178,7 @@ window.addEventListener('popstate', (e) => {
     }
 })
 
-document.getElementById('lugarDespacho').addEventListener('click', e => {
+document.querySelector('.lugarDespacho').addEventListener('click', e => {
     e.preventDefault();
     abrirModal('mapaLugarDespacho')
 })
@@ -191,20 +190,45 @@ document.getElementById('cuenta').addEventListener('click', async () => {
 
 })
 
+document.getElementById('carrito').addEventListener('click', () => {
+    carrito.mostrar('pc');
+})
+
+document.getElementById('cuentaLaptop').addEventListener('click', async () => {
+    await mostrarUsuario('laptop');
+    let imgFotoPerfil = document.getElementById('cuentaLaptop')
+    imgFotoPerfil.classList.toggle('seccionActiva');
+
+})
+
+document.getElementById('carritoLaptop').addEventListener('click', () => {
+    carrito.mostrar('laptop');
+})
 
 
 document.querySelector('.btnCerrarSesion').addEventListener('click', (e) => {
     if (e.target.classList.contains('iniciarSesion')) {
-        iniciarSesion()
+        iniciarSesion('pc')
     } else {
-        cerrarSesion()
+        cerrarSesion('pc')
     }
 
 })
 
-document.getElementById('carrito').addEventListener('click', () => {
+document.querySelector('.btnCerrarSesionLaptop').addEventListener('click', (e) => {
+    if (e.target.classList.contains('iniciarSesion')) {
+        iniciarSesion('laptop')
+    } else {
+        cerrarSesion('laptop')
+    }
+
+})
+
+document.getElementById('carritoLaptop').addEventListener('click', () => {
     carrito.mostrar('pc');
 })
+
+
 
 document.getElementById('buscar').addEventListener('input', (e) => {
     sugerirProductos()
@@ -212,6 +236,10 @@ document.getElementById('buscar').addEventListener('input', (e) => {
 })
 document.getElementById('buscar').addEventListener('click', () => {
     sugerirProductos()
+})
+
+document.querySelector('.imgMenu').addEventListener('click', (e) => {
+    abrirMenuDesplegable()
 })
 
 
@@ -227,7 +255,7 @@ const cargarLugarDeEntrega = () => {
                 domicilio = data[1].ubicacion[3]
                 keyUbicacion = data[0];
 
-                let labelDireccionDeEntrega = document.getElementById('zonaDeEntrega');
+                let labelDireccionDeEntrega = document.querySelector('.zonaDeEntrega');
                 if (domicilio.length > 18) {
                     labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ...`
                 } else {
@@ -298,6 +326,7 @@ const cerrarModal = () => {
     modal.innerHTML = '';
     bgModal.style.animation = '';
     bgModal.style.animation = 'desaparecer 0.2s forwards';
+    bgModal.style.display = 'none'
     body.style.overflow = 'auto';
 }
 const abrirModal = (tipoDeApertura, titulo, mensaje) => {
@@ -361,7 +390,7 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
             modal.appendChild(contenedorInputs)
             modal.appendChild(button);
             window.scroll({ top: 0, behavior: 'smooth' })
-            bgModal.style.animation = 'aparecer 0.2s forwards'
+            bgModal.style.animation = 'aparecerModal 0.2s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
         } else if (tipoDeApertura == 'mensaje') {
@@ -372,7 +401,7 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
 
             window.scroll({ top: 0, behavior: 'smooth' })
             modal.innerHTML = htmlCode;
-            bgModal.style.animation = 'aparecer 0.4s forwards'
+            bgModal.style.animation = 'aparecerModal 0.4s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
 
@@ -392,7 +421,7 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
             document.getElementById('btnCerrarMapa').addEventListener('click', () => {
                 cerrarModal()
             })
-            bgModal.style.animation = 'aparecer 0.4s forwards'
+            bgModal.style.animation = 'aparecerModal 0.4s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
 
@@ -474,7 +503,7 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
 
 
             window.scroll({ top: 0, behavior: 'smooth' })
-            bgModal.style.animation = 'aparecer 0.4s forwards'
+            bgModal.style.animation = 'aparecerModal 0.4s forwards'
             bgModal.style.display = 'flex';
             body.style.overflow = 'hidden';
 
@@ -521,7 +550,9 @@ const moverFooter = (prioridad) => {
 //funcion para mostrar las areas 
 const mostrarAreas = () => {
     const contenedorProductos = document.querySelector('.contenedorProductos');
+    contenedorProductos.style.display = 'none';
     const divElegirArea = document.querySelector('.elegirArea');
+
 
     let sobreNosotros = document.querySelector('.contenedorSobreNosotros')
     if (sobreNosotros) {
@@ -529,8 +560,9 @@ const mostrarAreas = () => {
     }
 
 
-    moverFooter('defecto')
+    moverFooter('defecto');
     contenedorProductos.style.animation = 'desaparecer 0.6s forwards'
+
     divElegirArea.style.animation = 'aparecerArea 0.6s forwards';
     history.pushState({ sitioActual: 'inicio' }, '', '/')
 }
@@ -541,11 +573,12 @@ const cargarProductos = (areaACargar) => {
     const contenedorProductos = document.querySelector('.contenedorProductos');
     const divElegirArea = document.querySelector('.elegirArea')
     divElegirArea.style.animation = 'desaparecerArea 0.1s forwards'
-
+    contenedorProductos.style.display = 'flex';
 
 
     window.scroll({ top: 0, behavior: "smooth" })
     contenedorProductos.innerHTML = '';
+
 
     for (let area in productos) {
         if (areaACargar == area) {
@@ -684,48 +717,86 @@ const mostrarUsuario = async (tipoDeApertura) => {
                 document.querySelector('.menuCuentaPc').style.animation = 'aparecerArea 0.5s forwards'
             }
         }
-    }
-}
+        if (tipoDeApertura == 'laptop') {
+            const contenedorInfoLogin = document.querySelector('.menuCuentaLaptop');
+            if (contenedorInfoLogin.classList.contains('menuCuentaActivo')) {
+                contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
+                await new Promise(resolve => setTimeout(() => {
+                    contenedorInfoLogin.classList.toggle('menuCuentaActivo')
+                    resolve()
+                    return
+                }, 700))
 
-const cerrarSesion = () => {
-    if (nombreUsuario && fotoDePerfil) {
-        if (confirm(`Esta seguro que quiere cerrar la sesion de: ${nombreUsuario} ?`)) {
-            nombreUsuario = undefined;
-            fotoDePerfil = undefined;
-            cargarUsuario()
+            } else {
+                contenedorInfoLogin.classList.toggle('menuCuentaActivo')
+                contenedorInfoLogin.style.animation = 'aparecerArea 0.5s forwards';
+            }
+
         }
     }
 }
 
-const iniciarSesion = async () => {
+const cerrarSesion = (modo) => {
+    if (nombreUsuario && fotoDePerfil) {
+        if (confirm(`Esta seguro que quiere cerrar la sesion de: ${nombreUsuario} ?`)) {
+            nombreUsuario = undefined;
+            fotoDePerfil = undefined;
+            cargarUsuario(modo)
+        }
+    }
+}
+
+const iniciarSesion = async (modo) => {
     fetch('../datos/Administradores.json')
         .then(usuarios => usuarios.json())
         .then(usuario => {
             Object.assign(usuariosAdministradores, usuario);
         })
-    await cerrarLogin()
+    await cerrarLogin(modo)
     abrirModal('iniciarSesion')
 }
 
-const cargarUsuario = () => {
-    const nombreCompleto = document.getElementById('nombreYApellido');
-    const fotoPerfil = document.getElementById('fotoPerfil');
-    const btnCerrarSesion = document.querySelector('.btnCerrarSesion');
+const cargarUsuario = (modo) => {
+    const nombreCompleto = document.querySelectorAll('.nombreYApellido');
+    const fotoPerfil = document.querySelectorAll('.fotoPerfil');
+    let btnIniciarSesion;
+    if(modo=='pc')  btnCerrarSesion = document.querySelector('.btnCerrarSesion')
+        else btnCerrarSesion = document.querySelector('.btnCerrarSesionLaptop')
 
     if (nombreUsuario && fotoDePerfil) {
-        nombreCompleto.textContent = nombreUsuario;
-        fotoPerfil.src = fotoDePerfil;
+        for (let img of fotoPerfil) {
+            img.src = fotoDePerfil;
+        }
+       
+        nombreCompleto.forEach(nombre => nombre.textContent = nombreUsuario)
+
+
     } else {
-        fotoPerfil.src = '';
-        nombreCompleto.textContent = 'No se ha iniciado sesión';
+        fotoPerfil.forEach(img=>img.src = '')
+        
+        nombreCompleto.forEach(nombre=>nombre.textContent='No se ha iniciado sesión')
+
         btnCerrarSesion.textContent = 'Iniciar Sesión'
         btnCerrarSesion.classList.add('iniciarSesion');
     }
 }
 
-const cerrarLogin = async () => {
+const cerrarLogin = async (modo) => {
+    if(modo=='pc'){
     const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
     let imgFotoPerfil = document.getElementById('cuenta')
+
+    contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
+    await new Promise(resolve => setTimeout(() => {
+        contenedorInfoLogin.classList.toggle('active')
+        imgFotoPerfil.classList.toggle('seccionActiva')
+        resolve()
+        return
+    }, 700))
+}
+if(modo=='laptop'){
+    const contenedorInfoLogin = document.querySelector('.menuCuentaLaptop');
+    let imgFotoPerfil = document.getElementById('cuentaLaptop')
 
     contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
     await new Promise(resolve => setTimeout(() => {
@@ -734,6 +805,7 @@ const cerrarLogin = async () => {
         resolve()
         return
     }, 700))
+}
 
 }
 
@@ -1055,11 +1127,11 @@ class Carrito {
         }
 
         let footerDentroListado;
-        if(!document.querySelector('.footerCarrito')){
-              footerDentroListado= document.createElement('FOOTER')
-            }else{
-                footerDentroListado= document.querySelector('.footerCarrito')
-            }
+        if (!document.querySelector('.footerCarrito')) {
+            footerDentroListado = document.createElement('FOOTER')
+        } else {
+            footerDentroListado = document.querySelector('.footerCarrito')
+        }
         let codigoFooter = document.querySelector('.footerCarrito').innerHTML;
         divProductosEnElCarrito.innerHTML = '';
 
@@ -1083,11 +1155,14 @@ class Carrito {
             const contenedorElegirArea = document.querySelector('.' + this.classContenedorElegirArea);
             const divProductosEnElCarrito = document.createElement('DIV');
             const divTerminarCompra = document.createElement('DIV');
+
+            contenedorProductos.style.display = 'grid'
+
             let footerDentroListado;
-            if(!document.querySelector('.footerCarrito')){
-              footerDentroListado= document.createElement('FOOTER')
-            }else{
-                footerDentroListado= document.querySelector('.footerCarrito')
+            if (!document.querySelector('.footerCarrito')) {
+                footerDentroListado = document.createElement('FOOTER')
+            } else {
+                footerDentroListado = document.querySelector('.footerCarrito')
             }
 
             contenedorPrincipal.innerHTML = '';
@@ -1100,6 +1175,7 @@ class Carrito {
             if (datos.length > 1) {
 
                 for (let dato in datos) {
+
                     if (datos[dato][1].productoCarrito != undefined) {
 
                         let descripcion = datos[dato][1].productoCarrito[1][1];
@@ -1166,109 +1242,115 @@ class Carrito {
 
             contenedorPrincipal.appendChild(divProductosEnElCarrito)
             divProductosEnElCarrito.appendChild(footerDentroListado)
-            
-
-        moverFooter('footerCarrito')
-        this.colocarEvento();
-
-        divProductosEnElCarrito.style.animation = 'aparecerCarrito 1s forwards';
-
-        divTerminarCompra.style.animation = 'aparecerCarrito 1.9s forwards';
 
 
-        divTerminarCompra.className = 'divTerminarCompra';
-        cargarLugarDeEntrega()
+            moverFooter('footerCarrito')
+            this.colocarEvento();
 
-        //contenedor finalizar compra
+            divProductosEnElCarrito.style.animation = 'aparecerCarrito 1s forwards';
 
-        const contenedor = document.createElement('DIV');
-        const enunciado = document.createElement('H1');
-        const lugarDespacho = document.createElement('H3')
-        const destino = document.createElement('H3');
-        const labelTotal = document.createElement('LABEL');
-        const total = document.createElement('H2');
-        const btnConfirmarCompra = document.createElement('BUTTON');
-        const labelModoDePago = document.createElement('LABEL');
-        const inputModoPago = document.createElement('INPUT');
-        const labelTargeta = document.createElement('LABEL')
+            divTerminarCompra.style.animation = 'aparecerCarrito 1.9s forwards';
 
 
-        contenedor.className = 'contenedorConfirmarCompra';
+            divTerminarCompra.className = 'divTerminarCompra';
+            cargarLugarDeEntrega()
 
-        enunciado.textContent = 'Finalizá tu compra'
+            //contenedor finalizar compra
 
-        lugarDespacho.innerHTML = 'Desde: <b>Florencia, Santa Fe</b>';
-
-        destino.innerHTML = `Hasta: <b>${domicilio}, ${localidad}-${provincia} </b>`;
-
-        total.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
-        total.classList.add('precioTotalEnCarrito');
-
-        labelModoDePago.innerHTML = 'Método de pago: '
-        labelModoDePago.id = 'labelMetodoDePago'
-        labelTargeta.textContent = '      Mastercard finalizada en: 0092'
-        inputModoPago.type = 'radio'
-        inputModoPago.setAttribute('checked', '')
-
+            const contenedor = document.createElement('DIV');
+            const enunciado = document.createElement('H1');
+            const lugarDespacho = document.createElement('H3')
+            const destino = document.createElement('H3');
+            const labelTotal = document.createElement('LABEL');
+            const total = document.createElement('H2');
+            const btnConfirmarCompra = document.createElement('BUTTON');
+            const labelModoDePago = document.createElement('LABEL');
+            const inputModoPago = document.createElement('INPUT');
+            const labelTargeta = document.createElement('LABEL')
 
 
-        labelTotal.innerHTML = '<br>Precio Total:'
+            contenedor.className = 'contenedorConfirmarCompra';
 
-        btnConfirmarCompra.textContent = 'Confirmar compra'
-        btnConfirmarCompra.id = 'confirmarCompra'
-        btnConfirmarCompra.addEventListener('click', async () => {
-            if (precioTotalEnCarrito > 0) {
-                if (confirm('Esta seguro de realizar la compra? ')) {
-                    const datos = await leerObjetos('datos');
-                    enviarNotificacion('Muchas gracias por tu compra, te avisaremos cuando llegue tu producto')
-                    let productosEnElCarrito = datos.filter(dato => dato[1].productoCarrito)
-                    productosEnElCarrito.forEach(async elemento => {
-                        await this.eliminar(elemento[0], { notificacion: 'no' })
+            enunciado.textContent = 'Finalizá tu compra'
 
-                    })
+            lugarDespacho.innerHTML = 'Desde: <b>Florencia, Santa Fe</b>';
+
+            destino.innerHTML = `Hasta: <b>${domicilio}, ${localidad}-${provincia} </b>`;
+
+            total.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
+            total.classList.add('precioTotalEnCarrito');
+
+            labelModoDePago.innerHTML = 'Método de pago: '
+            labelModoDePago.id = 'labelMetodoDePago'
+            labelTargeta.textContent = '      Mastercard finalizada en: 0092'
+            inputModoPago.type = 'radio'
+            inputModoPago.setAttribute('checked', '')
+
+
+
+            labelTotal.innerHTML = '<br>Precio Total:'
+
+            btnConfirmarCompra.textContent = 'Confirmar compra'
+            btnConfirmarCompra.id = 'confirmarCompra'
+            btnConfirmarCompra.addEventListener('click', async () => {
+                if (precioTotalEnCarrito > 0) {
+                    if (confirm('Esta seguro de realizar la compra? ')) {
+                        const datos = await leerObjetos('datos');
+                        enviarNotificacion('Muchas gracias por tu compra, te avisaremos cuando llegue tu producto')
+                        let productosEnElCarrito = datos.filter(dato => dato[1].productoCarrito)
+                        productosEnElCarrito.forEach(async elemento => {
+                            await this.eliminar(elemento[0], { notificacion: 'no' })
+
+                        })
+                    }
+                } else {
+                    enviarNotificacion('No hay productos en el carrito')
                 }
-            } else {
-                enviarNotificacion('No hay productos en el carrito')
-            }
-        })
+            })
 
-        contenedor.appendChild(enunciado);
-        contenedor.appendChild(lugarDespacho);
-        contenedor.appendChild(destino);
-        contenedor.appendChild(labelModoDePago);
-        contenedor.appendChild(inputModoPago)
-        contenedor.appendChild(labelTargeta)
-        contenedor.appendChild(labelTotal);
-        contenedor.appendChild(total);
-        contenedor.appendChild(btnConfirmarCompra);
+            contenedor.appendChild(enunciado);
+            contenedor.appendChild(lugarDespacho);
+            contenedor.appendChild(destino);
+            contenedor.appendChild(labelModoDePago);
+            contenedor.appendChild(inputModoPago)
+            contenedor.appendChild(labelTargeta)
+            contenedor.appendChild(labelTotal);
+            contenedor.appendChild(total);
+            contenedor.appendChild(btnConfirmarCompra);
 
-        divTerminarCompra.appendChild(contenedor)
+            divTerminarCompra.appendChild(contenedor)
 
-        contenedorPrincipal.style.animation = '';
-        contenedorPrincipal.appendChild(divTerminarCompra);
+            contenedorPrincipal.style.animation = '';
+            contenedorPrincipal.appendChild(divTerminarCompra);
 
-        contenedorPrincipal.classList.add('carrito')
-        history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
+            contenedorPrincipal.classList.add('carrito')
+            history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
 
-        contenedorElegirArea.style.animation = 'desaparecerArea 0.3s forwards';
+            contenedorElegirArea.style.animation = 'desaparecerArea 0.3s forwards';
 
 
-        this.actualizarPrecio();
+            this.actualizarPrecio();
 
+
+        }
 
     }
-
-}
 
 }
 const sobreNosotros = () => {
     const contenedorPrincipal = document.querySelector('.contenedorProductos');
     const contenedorElegirArea = document.querySelector('.elegirArea')
     const contenedorSobreNosotros = document.createElement('DIV')
-    contenedorElegirArea.style.animation = 'desaparecerArea 1s forwards'
-    contenedorPrincipal.innerHTML = ''
 
-    const htmlCode = `
+    contenedorProductos.style.display = 'block';
+
+    const bgModal = document.querySelector('.modalBackground');
+    console.log(bgModal.style.display);
+    if (bgModal.style.display == '' || bgModal.style.display == 'none') {
+        contenedorElegirArea.style.animation = 'desaparecerArea 1s forwards'
+        contenedorPrincipal.innerHTML = ''
+
+        const htmlCode = `
     
      <h1>¡Bienvenidos a nuestra tienda online de artículos de pesca y carnadas!</h1>
      <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Giménez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
@@ -1280,26 +1362,44 @@ const sobreNosotros = () => {
     <span >Este sitio fue creado con fines educativos y no cuenta con una funcionalidad real de envios, tampoco guardamos  información de los usuarios que visiten esta página. </span>
     <p align='center'>Proyecto finalizado el 21 de octubre de 2025</p>
     `
-    if (!document.querySelector('.contenedorSobreNosotros')) {
-        contenedorSobreNosotros.innerHTML = htmlCode;
-        contenedorSobreNosotros.className = 'contenedorSobreNosotros'
-        contenedorPrincipal.style.animation = 'aparecer 1s forwards';
-        contenedorPrincipal.appendChild(contenedorSobreNosotros);
+
+        if (!document.querySelector('.contenedorSobreNosotros')) {
+            contenedorSobreNosotros.innerHTML = htmlCode;
+            contenedorSobreNosotros.className = 'contenedorSobreNosotros'
+            contenedorPrincipal.style.animation = 'aparecer 1s forwards';
+            contenedorPrincipal.appendChild(contenedorSobreNosotros);
 
 
-    } else {
-        contenedorPrincipal.style.animation = 'aparecer 1s forwards';
-        let contenedorSobreNosotrosVisible = document.querySelector('.contenedorSobreNosotros')
-        contenedorSobreNosotrosVisible.style.display = 'block';
+        } else {
+            contenedorPrincipal.style.animation = 'aparecer 1s forwards';
+            let contenedorSobreNosotrosVisible = document.querySelector('.contenedorSobreNosotros')
+            contenedorSobreNosotrosVisible.style.display = 'block';
+        }
+        moverFooter('defecto');
     }
-    moverFooter('defecto');
-
 }
 
+const abrirMenuDesplegable = () => {
+    const menuDesplegable = document.querySelector('.menuDesplegableLaptop');
+    menuDesplegable.style.animation = '';
+    requestAnimationFrame(() => {
+        if (menuDesplegable.classList.contains('activo')) {
+            menuDesplegable.classList.remove('activo')
+            menuDesplegable.classList.add('inactivo')
+        } else {
+            menuDesplegable.classList.remove('inactivo')
+            menuDesplegable.classList.add('activo')
+        }
+    })
+}
 
 const carrito = new Carrito();
 carrito.classContenedorPrincipal = 'contenedorProductos';
 carrito.classContenedorElegirArea = 'elegirArea';
+
+
+const contenedorProductos = document.querySelector('.contenedorProductos');
+contenedorProductos.style.display = 'none';
 
 
 
