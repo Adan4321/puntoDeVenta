@@ -397,6 +397,8 @@ footer ul {
 
 .elegirArea {
     padding-top: 30px;
+    background-image: url("../img/fondo\ articulos\ de\ pescajpg.jpg");
+     background-size: cover;
 }
 
 .opciones {
@@ -413,13 +415,37 @@ footer ul {
     border-radius: 10px;
     border: solid #1e72d2 2px;
     margin: 10px;
+    color: #0077ff;
+    text-shadow: 1px 1px 0px black;
+}
+.targetaDeSeleccion.pesca{
+     background-image: url("../img/fondo\ articulos\ de\ pescajpg.jpg");
+    position: relative;
+    background-size: cover;
+    backdrop-filter: blur(1px);
 
+
+}
+.targetaDeSeleccion.pesca::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+     background-size: cover;
+    filter: blur(1px);
+    z-index: -1;
 }
 
 .targetaDeSeleccion h3 {
     text-align: center;
-    color: #222;
+    color: #0077ff;
     margin-bottom: 10px;
+    background-color: #ccccccad;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 .targetaDeSeleccion ul {
@@ -427,7 +453,30 @@ footer ul {
     font-size: 20px;
     font-family: sans-serif;
     height: 180px;
+    list-style-position: inside;
+    padding: 10px;
+     background-color: #ccccccad;
+     border-radius: 10px;
+}
+.targetaDeSeleccion.carnadas{
+     background-image: url("../img/fondo\ carnadas.jpg");
+    position: relative;
+    background-size: cover;
+    backdrop-filter: blur(1px);
 
+
+}
+.targetaDeSeleccion.carnadas::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+     background-size: cover;
+    filter: blur(2px);
+    z-index: -1;
 }
 
 .targetaDeSeleccion button {
@@ -435,14 +484,16 @@ footer ul {
     top: 10px;
     left: 40px;
     padding: 10px 30px;
-    background: none;
+     background: #b4b4b4;
     border: #1e72d2 solid 2px;
     border-radius: 10px;
+    color: #0077ff;
 }
 
 .targetaDeSeleccion button:hover {
-    background: #b4b4b4;
-    color: #1e72d2;
+    background: #134277;
+    color: #fff;
+    border: solid 2px #0077ff;
 }
 
 #btnCerrarMapa {
