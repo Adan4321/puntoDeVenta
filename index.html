@@ -42,7 +42,7 @@
                 <div class="busqueda backgroundImgBuscar">
                     <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
                 </div>
-                <input class="busqueda" id="buscar" placeholder="¿Qué Buscas Hoy ?" type="text">
+                <input class="busqueda" id="buscar" autocomplete="none" placeholder="¿Qué Buscas Hoy ?" type="text">
 
                 <div class="contenedorSugerenciasBusqueda">
 
@@ -65,8 +65,8 @@
         </div>
         <nav>
             <ul>
-                <li onclick="mostrarAreas()"><span>Inicio</span></li>
-                <li><span>Nosotros</span></li>
+                <li onclick="mostrarAreas('')"><span>Inicio</span></li>
+                <li onclick="sobreNosotros()"><span>Nosotros</span></li>
             </ul>
             <div class="loginMobile">
                 <img src="./img/imgCuentaBlanco.png" id="cuenta" alt="">
@@ -96,34 +96,35 @@
             <ul>
                 <li>Cañas </li>
                 <li>Líneas</li>
-                <li>Riles</li>
+                <li>Reels</li>
                 <li>Señuelos</li>
                 <li>Anzuelos</li>
-                <li>Lider de acero</li>
+                <li>Lider de pesca</li>
                 <li>Plomadas</li>
             </ul>
             <button id="btnCargarArticulosPesca">Ver más</button>
+            
         </div>
         </div>
 
 
         
-    </div>
+    </div> 
     <div class="contenedorProductos">
         <!--productos y eleccion de productos-->
         <!--animación de carga de productos-->
         <!-- <div id="loader-wrapper">
             <div class="loader"></div>
         </div> -->
-        
+
     </div>
 </div>
 
     <!---pie de pagina-->
-    <footer>
+    <footer class="footerDefecto footerActivo">
     
         <ul>
-            <li><span id="spanCreador">Sitio Web Desarrollado y diseñado por Adán Ledesma con fines educativos. Cualquier uso indevido queda excepto de la responsabilidad del creador.</span></li>
+            <li><span id="spanCreador">Adán Ledesma ~ 2025 </span></li>
         </ul>
 
 

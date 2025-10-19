@@ -10,7 +10,6 @@ IDbRequest.addEventListener('upgradeneeded', () => {
     db.createObjectStore('datos', {
         autoIncrement: true
     })
-    console.log('se creo la base de datos')
 })
 
 // operaciones CRUD
@@ -58,6 +57,7 @@ const modificarObjeto = (key, objeto, seccion) => {
 const eliminarObjeto = (key, seccion) => {
     const IDBData = getIDBData(seccion, 'readwrite');
     IDBData.delete(key);
+
 }
 
 const getIDBData = (seccion, mode) => {
@@ -75,24 +75,41 @@ const getIDBData = (seccion, mode) => {
 var localidad, codigoPostal, provincia, domicilio, keyUbicacion;
 var nombreUsuario = 'demo', fotoDePerfil = '../img/fondo1.jpg';
 var usuariosAdministradores = {}
+var precioTotalEnCarrito = 0;
+
 
 //productos
 const productos = {
     carnadas: {
-        Lombrices: ["../img/productos/Lombrices.jpg", "bolsa de 100 g de Lombrices", "$1800"],
-        Morena: ["../img/productos/Lombrices.jpg", "descripción adhffjjddfjfhsjfjhjfhsjhfjjjhjfhsjhsjdfjhsdjfhjsdfjhsdjdfhjshfjhdjfhjshfjhdjfhsdjhjfhjsdhfjsdjfjsdhfjshdjfsjdhfsfdshfsjsfhshdjfhsjfjsjfhjsfjsdjfdjjsjsfsdjfjsdjfjd", "$3000"],
-        Cascara: ["../img/productos/Lombrices.jpg", "mejor calidad", "$3200"],
-        Anguila: ["../img/productos/Lombrices.jpg", "descripción", "$4800"],
-        Sábalo: ["../img/productos/Lombrices.jpg", "descripción", "$3200"],
-        Mojarra: ["../img/productos/Lombrices.jpg", "Paquete 500g", "$1500"],
+        Lombrices: ["../img/productos/Lombrices.jpg", "Bolsa de 100 gramos de Lombrices ", "$1.800"],
+        Morena: ["../img/productos/morena.jpg", "Bolsa al  vacio de morena", "$3.000"],
+        Cascarudo: ["../img/productos/cascarudo.jpg", "Una docena de la mejor calidad ", "$3.200"],
+        Cascarudo_media_docena: ["../img/productos/cascarudo.jpg", "Media docena de la mejor calidad", "$1.800"],
+        Anguila: ["../img/productos/anguilas.jpg", "Una docena de anguilas ", "$4.800"],
+        Anguila_media_docena: ["../img/productos/anguilas.jpg", "media docena", "$2.900"],
+        Sabalitos: ["../img/productos/sabalitos.jpg", "Una docena de sabalitos, ideal para pescar en ríos pequeños", "$3.200"],
+        Sabalitos_media_docena: ["../img/productos/sabalitos.jpg", "la misma calidad en media docena", "$1.800"],
+        Mojarra: ["../img/productos/mojarras.jpg", "Un paquete de 500 gramos de mojarra al vacio", "$1.500"],
+        Sabalo_trozado: ["../img/productos/sabalo trozado enbolsado.webp", "Carnada enbolsada al vacio", "$4.000"],
+        Tripa_de_gallina: ["../img/productos/tripa de gallina.webp", "Carnada embolsada al vacio para pesca variada", "$4.800"],
     },
     articulosPesca: {
-        Riles: ["../img/productos/Lombrices.jpg", "A elección ", "$20.000"],
-        anzuelos: ["../img/productos/Lombrices.jpg", "Todas las medidas", "$1800"],
-        Caña_de_Pescar: ["../img/productos/Lombrices.jpg", "descripción", "$30.000"],
-        Lider_de_Pesca: ["../img/productos/Lombrices.jpg", "cada unidad", "$800"],
-        lineas_para_pescar: ["../img/productos/Lombrices.jpg", "lineas ultra resistentes de cualquier diámetro X 100 M", "$5000"],
-        Señuelos_para_pesca: ["../img/productos/Lombrices.jpg", "descripcion", "$1000"],
+        Reel_frontal_Skyline_surf_6000: ["../img/productos/skyline surf 6000.webp", "Exelente calidad 3 rodamientos con capacidad para 100 M de linea", "$229.000"],
+        Reel_frontal_Firecast_4000: ["../img/productos/firecast 4000.webp", "Exelente calidad 1 rodamiento con capacidad para 30 M de linea", "$37.600"],
+        Reel_frontal_zest_fox_4000: ["../img/productos/fox 4000.webp", "Exelente calidad 1 rodamiento con capacidad para 40 M de linea", "$47.500"],
+        Reel_frontal_Nitro_500_metal: ["../img/productos/nitro 5000.webp", "Exelente calidad 2 rodamiento con capacidad para 30 M de linea", "$87.700"],
+        Reel_frontal_XTI_sw_4000: ["../img/productos/XTI sw 4000.webp", "Exelente calidad 2 rodamiento con capacidad para 50 M de linea", "$78.300"],
+        Caña_Silvertech_210: ["../img/productos/silvertech 210.webp", "Caña de fibra de vidrio de alta resistencia. 1.66 metros", "$62.700"],
+        caña_Mystix_infinity_198_MTS: ["../img/productos/caña mystix.webp", "Caña de pescar clasica Colony de fibra de vidrio. 1.66 metros", "$198.500"],
+        caña_Colony_aventura_MT: ["../img/productos/colony aventura.webp", "Caña de fibra reforzada de vidrio de alta resistencia. 2.0 metros", "$152.200"],
+        anzuelos: ["../img/productos/anzuelos.webp", "Juego de anzuelos de varias medidas, desde 1/0 hasta 6 ", "$18.700"],
+        Lider_de_Pesca: ["../img/productos/lider de pesca.webp", "10 lider pesca leader acero armado 20 cm", "$5.700"],
+        Lider_de_acero_para_pesca: ["../img/productos/lider de pesca acero armado.webp", "Kit de 5 lideres de pesca  acero armado 15 cm", "$3.500"],
+        lineas_para_pescar_Grillon: ["../img/productos/linea para pescar grillon.webp", "lineas ultra resistentes soporta 22,9 Kg 0.60 mm 100 metros ", "$5.000"],
+        lineas_para_pescar_Camou_line_050mm: ["../img/productos/linea de nylon.webp", "lineas de pesca Camou line 0.50 mm resiste hasta 32 Kg color verde 100 metros", "$5.000"],
+        Plomadas_Surtidas_30g_a_100g: ["../img/productos/plomadas surtidas.webp", "Plomadas surtidas de 30g a 100g peso total 1 Kg", "$13.500"],
+        Plomadas_10G: ["../img/productos/plomada  10g  5u.webp", "kit de 5 plomadas de 10 g cada una", "$5.500"],
+        Plomadas_50G: ["../img/productos/plomada 50g 5u.webp", "kit de 5 plomadas de 50 g cada una", "$7.000"],
     }
 }
 
@@ -109,13 +126,13 @@ document.getElementById('zonaDeEntrega').addEventListener('click', e => {
 })
 document.getElementById('btnCargarCarnadas').addEventListener('click', () => {
     cargarProductos('carnadas');
-    if(history.state.sitioActual!='carnadas') history.pushState({ sitioActual: "carnadas" }, '', '#carnadas')
+    if (history.state.sitioActual != 'carnadas') history.pushState({ sitioActual: "carnadas" }, '', '#carnadas')
 
 })
 
 document.getElementById('btnCargarArticulosPesca').addEventListener('click', () => {
     cargarProductos('articulosPesca');
-    if(history.state.sitioActual!='articulosPesca')  history.pushState({ sitioActual: "articulosPesca" }, '', '#articulosPesca')
+    if (history.state.sitioActual != 'articulosPesca') history.pushState({ sitioActual: "articulosPesca" }, '', '#articulosPesca')
 
 })
 window.addEventListener('load', () => {
@@ -142,26 +159,24 @@ window.addEventListener('click', (e) => {
 })
 
 window.addEventListener('popstate', (e) => {
-    state = e.state;
-    console.log(e.state)
     if (e.state == null || e.state.sitioActual == 'inicio') {
         history.replaceState({ sitioActual: 'inicio' }, '', '/')
         location.reload()
-    
+
     }
     if (e.state.sitioActual == 'carnadas') {
         cargarProductos('carnadas');
     }
     if (e.state.sitioActual == 'articulosPesca') {
         cargarProductos('articulosPesca');
-        
-    }
-    if(e.state.sitioActual=='mostrarProducto'){
-        console.dir(e.state.producto);
-        mostrarProducto(e.state.producto);
-      
-    }
 
+    }
+    if (e.state.sitioActual == 'mostrarProducto') {
+        mostrarProducto(e.state.producto);
+    }
+    if (e.state.sitioActual == 'carrito') {
+        carrito.mostrar()
+    }
 })
 
 document.getElementById('lugarDespacho').addEventListener('click', e => {
@@ -169,8 +184,8 @@ document.getElementById('lugarDespacho').addEventListener('click', e => {
     abrirModal('mapaLugarDespacho')
 })
 
-document.getElementById('cuenta').addEventListener('click', () => {
-    mostrarUsuario('pc');
+document.getElementById('cuenta').addEventListener('click', async () => {
+    await mostrarUsuario('pc');
     let imgFotoPerfil = document.getElementById('cuenta')
     imgFotoPerfil.classList.toggle('seccionActiva');
 
@@ -204,22 +219,24 @@ document.getElementById('buscar').addEventListener('click', () => {
 
 const cargarLugarDeEntrega = () => {
     leerObjetos('datos').then(dato => {
-        if (dato[0][1].ubicacion != undefined) {
-            localidad = dato[0][1].ubicacion[0]
-            codigoPostal = dato[0][1].ubicacion[1]
-            provincia = dato[0][1].ubicacion[2]
-            domicilio = dato[0][1].ubicacion[3]
-            keyUbicacion = dato[0][0];
+        dato.forEach(data => {
+            if (data[1].ubicacion != undefined) {
+                localidad = data[1].ubicacion[0]
+                codigoPostal = data[1].ubicacion[1]
+                provincia = data[1].ubicacion[2]
+                domicilio = data[1].ubicacion[3]
+                keyUbicacion = data[0];
 
-            let labelDireccionDeEntrega = document.getElementById('zonaDeEntrega');
-            if (domicilio.length > 18) {
-                labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ...`
-            } else {
-                labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ${provincia}`
+                let labelDireccionDeEntrega = document.getElementById('zonaDeEntrega');
+                if (domicilio.length > 18) {
+                    labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ...`
+                } else {
+                    labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ${provincia}`
+                }
             }
-        }
-    }
-    )
+        })
+
+    })
 }
 
 const modificarZonaDeEntrega = () => {
@@ -241,6 +258,7 @@ const modificarZonaDeEntrega = () => {
             modificarObjeto(keyUbicacion, { ubicacion: [letLocalidad.value, letcodigoPostal.value, letprovincia.value, letDomicilio.value] }, 'datos')
             cargarLugarDeEntrega()
             cerrarModal()
+            location.reload()
         } else {
             alert('Por favor complete todos los campos.')
         }
@@ -475,13 +493,46 @@ const abrirModal = (tipoDeApertura, titulo, mensaje) => {
 
 }
 
+//función para cambiar de lugar el footer
+
+
+const moverFooter = (prioridad) => {
+    const footerDefecto = document.querySelector('.footerDefecto');
+    const footerCarrito = document.querySelector('.footerCarrito');
+
+    if (prioridad == 'defecto') {
+        if (!footerDefecto.classList.contains('footerActivo')) {
+            footerDefecto.classList.toggle('footerActivo');
+            if (footerCarrito) footerCarrito.classList.toggle('footerActivo')
+        }
+    }
+    if (prioridad == 'footerCarrito') {
+        if (!footerCarrito.classList.contains('footerActivo')) {
+            footerDefecto.classList.toggle('footerActivo');
+
+            footerCarrito.classList.toggle('footerActivo')
+        }
+    }
+
+
+}
+
+
 //funcion para mostrar las areas 
 const mostrarAreas = () => {
     const contenedorProductos = document.querySelector('.contenedorProductos');
     const divElegirArea = document.querySelector('.elegirArea');
 
-    contenedorProductos.style.animation = 'desaparecerArea 0.6s forwards'
+    let sobreNosotros = document.querySelector('.contenedorSobreNosotros')
+    if (sobreNosotros) {
+        sobreNosotros.style.display = 'none';
+    }
+
+
+    moverFooter('defecto')
+    contenedorProductos.style.animation = 'desaparecer 0.6s forwards'
     divElegirArea.style.animation = 'aparecerArea 0.6s forwards';
+    history.pushState({ sitioActual: 'inicio' }, '', '/')
 }
 
 //Función para cargar los productos
@@ -489,9 +540,9 @@ const cargarProductos = (areaACargar) => {
 
     const contenedorProductos = document.querySelector('.contenedorProductos');
     const divElegirArea = document.querySelector('.elegirArea')
-    divElegirArea.style.animation = 'desaparecerArea 0.6s forwards'
+    divElegirArea.style.animation = 'desaparecerArea 0.1s forwards'
 
-    contenedorProductos.style.animation = ''
+
 
     window.scroll({ top: 0, behavior: "smooth" })
     contenedorProductos.innerHTML = '';
@@ -501,7 +552,9 @@ const cargarProductos = (areaACargar) => {
             for (let nombreProducto in productos[area]) {
                 if (nombreProducto.includes('_')) {
                     nombreProductoFormateado = nombreProducto.replaceAll('_', ' ');
-                    console.log('pass')
+                    if (nombreProductoFormateado.includes('media docena')) {
+                        nombreProductoFormateado = nombreProductoFormateado.substring('0', nombreProductoFormateado.indexOf('media docena') - 1)
+                    }
                 } else {
                     nombreProductoFormateado = nombreProducto;
                 }
@@ -548,28 +601,28 @@ const cargarProductos = (areaACargar) => {
 
                 img.id = 'imgProducto';
                 img.style.width = '200px';
-                img.style.cursor='pointer'
+                img.style.cursor = 'pointer'
                 img.src = productos[area][nombreProducto][0]
 
                 nombreDelProducto.classList.add('nombreProducto');
                 nombreDelProducto.textContent = nombreProductoFormateado;
 
                 descripcionProducto.className = 'descripcion';
-                if( productos[area][nombreProducto][1].length>90){
-                    let verMas= document.createElement('A');
-                    verMas.textContent='Ver más'
-                     verMas.id='btnVerMas'
-                    verMas.addEventListener('click',(e)=>{
+                if (productos[area][nombreProducto][1].length > 90) {
+                    let verMas = document.createElement('A');
+                    verMas.textContent = 'Ver más'
+                    verMas.id = 'btnVerMas'
+                    verMas.addEventListener('click', (e) => {
                         e.preventDefault();
                         mostrarProducto({ [nombreProducto]: productos[area][nombreProducto] })
                     })
 
-                    descripcionProducto.textContent = productos[area][nombreProducto][1].substring(0,90) +'... '
+                    descripcionProducto.textContent = productos[area][nombreProducto][1].substring(0, 90) + '... '
                     descripcionProducto.appendChild(verMas)
-                }else{
+                } else {
                     descripcionProducto.textContent = productos[area][nombreProducto][1]
                 }
-                
+
 
                 precioProducto.className = 'precioProducto';
                 precioProducto.textContent = productos[area][nombreProducto][2]
@@ -590,7 +643,8 @@ const cargarProductos = (areaACargar) => {
                 btnAgregar.className = 'btnAagregar';
                 btnAgregar.textContent = 'Añadir';
                 btnAgregar.addEventListener('click', () => {
-                    console.log('listo')
+                    añadirObjeto('datos', { productoCarrito: [nombreProducto, productos[area][nombreProducto]], cantidad: inputCantidad.value })
+                    enviarNotificacion('Producto: ' + nombreProductoFormateado + ' añadido al carrito')
                 })
 
 
@@ -605,21 +659,25 @@ const cargarProductos = (areaACargar) => {
                 producto.appendChild(contenedorInputCantidad)
                 producto.appendChild(btnAgregar);
 
+                contenedorProductos.style.animation = 'aparecer 1s forwards';
+
                 contenedorProductos.appendChild(producto);
             }
         }
     }
 }
 
-const mostrarUsuario = (tipoDeApertura) => {
+const mostrarUsuario = async (tipoDeApertura) => {
     if (tipoDeApertura) {
         if (tipoDeApertura == 'pc') {
             const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
             if (contenedorInfoLogin.classList.contains('active')) {
                 document.querySelector('.menuCuentaPc').style.animation = 'desaparecerArea 0.8s forwards'
-                setTimeout(() => {
+                await new Promise(resolve => setTimeout(() => {
                     contenedorInfoLogin.classList.toggle('active')
-                }, 802)
+                    resolve()
+                    return
+                }, 700))
 
             } else {
                 contenedorInfoLogin.classList.toggle('active')
@@ -639,13 +697,13 @@ const cerrarSesion = () => {
     }
 }
 
-const iniciarSesion = () => {
+const iniciarSesion = async () => {
     fetch('../datos/Administradores.json')
         .then(usuarios => usuarios.json())
         .then(usuario => {
             Object.assign(usuariosAdministradores, usuario);
         })
-    cerrarLogin()
+    await cerrarLogin()
     abrirModal('iniciarSesion')
 }
 
@@ -665,15 +723,18 @@ const cargarUsuario = () => {
     }
 }
 
-const cerrarLogin = () => {
+const cerrarLogin = async () => {
     const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
     let imgFotoPerfil = document.getElementById('cuenta')
 
     contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
-    setTimeout(() => {
+    await new Promise(resolve => setTimeout(() => {
         contenedorInfoLogin.classList.toggle('active')
-    }, 802)
-    imgFotoPerfil.classList.toggle('seccionActiva');
+        imgFotoPerfil.classList.toggle('seccionActiva');
+        resolve()
+        return
+    }, 700))
+
 }
 
 const enviarNotificacion = (mensaje) => {
@@ -769,7 +830,7 @@ const mostrarProducto = producto => {
     const btnDisminuir = document.createElement('BUTTON');
     const contenedorInputCantidad = document.createElement('DIV')
 
-    if(history.state.sitioActual!='mostrarProducto') history.pushState({sitioActual:'mostrarProducto', producto:producto},'',`#producto:${nombreProducto}`)
+    if (history.state.sitioActual != 'mostrarProducto') history.pushState({ sitioActual: 'mostrarProducto', producto: producto }, '', `#producto:${nombreProducto}`)
 
 
     contenedorPrincipal.innerHTML = '';
@@ -777,6 +838,9 @@ const mostrarProducto = producto => {
 
     if (nombreProducto.includes('_')) {
         nombreProductoFormateado = nombreProducto.replaceAll('_', ' ');
+        if (nombreProductoFormateado.includes('media docena')) {
+            nombreProductoFormateado = nombreProductoFormateado.substring('0', nombreProductoFormateado.indexOf('media docena') - 1)
+        }
     } else {
         nombreProductoFormateado = nombreProducto;
     }
@@ -844,7 +908,10 @@ const mostrarProducto = producto => {
     btnAgregar.className = 'btnAagregar';
     btnAgregar.textContent = 'Añadir';
     btnAgregar.addEventListener('click', () => {
-        console.log('listo')
+        let valorInput = inputCantidad.value;
+        let clave = Object.keys(producto);
+        añadirObjeto('datos', { productoCarrito: [clave[0], [producto[clave][0], producto[clave][1], producto[clave][2]]], cantidad: inputCantidad.value })
+        enviarNotificacion('Producto: ' + nombreProductoFormateado + ' añadido al carrito')
     })
 
     tarjetaProducto.appendChild(nombreDelProducto);
@@ -865,6 +932,10 @@ const mostrarProducto = producto => {
 
 }
 
+const darFormato = (precio) => {
+    return precio.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 //objeto Carrito de compras
 
 class Carrito {
@@ -872,36 +943,363 @@ class Carrito {
     classContenedorPrincipal = ''
     classContenedorElegirArea = ''
     productosComprados = {}
-    añadir(producto) {
+    colocarEvento() {
+        let elementos = document.querySelectorAll('.btnEliminarProductoCarrito')
+        elementos.forEach(elemento => {
+            elemento.addEventListener('click', () => {
+                if (confirm('Esta seguro de quitar este producto? ')) {
+                    carrito.eliminar(elemento.id)
+                }
+            })
+
+        })
 
     }
-    eliminar(producto) {
+    async eliminar(id, obj) {
+
+        eliminarObjeto(+id, 'datos')
+        if (!obj) {
+            enviarNotificacion('Producto quitado');
+        }
+
+        await this.actualizar()
+        this.actualizarPrecio()
+    }
+
+
+    actualizarPrecio() {
+
+        const precioTotal = document.querySelector('.precioTotalEnCarrito')
+        precioTotalEnCarrito = 0
+        const productos = document.querySelectorAll('.precioTotalProducto')
+        productos.forEach(precio => {
+            let precioTabulado = precio.textContent.substring(15)
+            precioTabulado = precioTabulado.replaceAll('.', '')
+            precioTotalEnCarrito += +precioTabulado;
+
+        })
+        if (productos.length == 0) {
+            precioTotalEnCarrito = 0
+        }
+
+        precioTotal.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
+    }
+    async actualizar() {
+        const divProductosEnElCarrito = document.querySelector('.ProductosEnElCarrito');
+        const divTerminarCompra = document.createElement('DIV');
+
+
+        const datos = await leerObjetos('datos');
+        const lista = document.createElement('UL');
+        lista.classList.add('listadoProductos')
+
+        if (datos.length > 1) {
+            for (let dato in datos) {
+                if (datos[dato][1].productoCarrito != undefined) {
+                    let descripcion = datos[dato][1].productoCarrito[1][1];
+
+                    if (descripcion.length > 180) {
+                        descripcion = descripcion.substring(0, 180) + ' ...'
+                    }
+
+                    const nombre = datos[dato][1].productoCarrito[0]
+                    const urlImagen = datos[dato][1].productoCarrito[1][0]
+                    const cantidad = +datos[dato][1].cantidad
+                    let precioUnitario = datos[dato][1].productoCarrito[1][2].substring('1')
+                    precioUnitario = +precioUnitario.replaceAll('.', '');
+                    const precioTotal = (precioUnitario * cantidad)
+                    precioTotalEnCarrito += precioTotal;
+                    const li = document.createElement("li");
+
+
+                    li.classList.add('listadoProductoCarrito')
+
+                    li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <img src="${urlImagen}" alt="${nombre}" style="width: 80px; height: auto; border: 1px solid #ccc;" />
+                               <div class="">
+                                 <h4 style="margin: 0;">${nombre.replace(/_/g, ' ')}</h4>
+                                 <p style="margin: 0;">${descripcion}</p>
+                                 <p style="margin: 0;">Cantidad: ${cantidad}</p>
+                                 <p style="margin: 0;">Precio unitario: $${precioUnitario}</p>
+                                 <strong class="precioTotalProducto">Precio total: $${darFormato(precioTotal.toString())}</strong>
+                                 <span hidden > </span>
+                               </div>
+                                <div id='${datos[dato][0]}' class="btnEliminarProductoCarrito"></div>
+                             </div>
+    `;
+
+                    lista.appendChild(li);
+
+
+                }
+
+            }
+
+            this.actualizarPrecio()
+
+        } else {
+
+            let li = document.createElement('LI')
+            li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <div class="">
+                                 <h4 style="margin-left:10px; margin-top:20px;  ">No Hay productos en el carrito</h4>
+                             </div>
+    `;
+
+            lista.appendChild(li)
+            divProductosEnElCarrito.appendChild(lista)
+            divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
+
+        }
+
+        let footerDentroListado;
+        if(!document.querySelector('.footerCarrito')){
+              footerDentroListado= document.createElement('FOOTER')
+            }else{
+                footerDentroListado= document.querySelector('.footerCarrito')
+            }
+        let codigoFooter = document.querySelector('.footerCarrito').innerHTML;
+        divProductosEnElCarrito.innerHTML = '';
+
+        footerDentroListado.innerHTML = codigoFooter;
+        divProductosEnElCarrito.appendChild(lista);
+
+        footerDentroListado.classList.add('footerCarrito')
+
+        divProductosEnElCarrito.appendChild(footerDentroListado);
+        moverFooter('footerCarrito');
+        divProductosEnElCarrito.style.animation = 'actualizarCarrito 3s forwards'
+
+        this.colocarEvento()
 
     }
-    actualizar() {
+    async mostrar(tipo) {
 
-    }
-    mostrar(tipo) {
 
         if (tipo == 'pc') {
             const contenedorPrincipal = document.querySelector('.' + this.classContenedorPrincipal);
             const contenedorElegirArea = document.querySelector('.' + this.classContenedorElegirArea);
-            const enunciado = document.createElement('H2');
+            const divProductosEnElCarrito = document.createElement('DIV');
+            const divTerminarCompra = document.createElement('DIV');
+            let footerDentroListado;
+            if(!document.querySelector('.footerCarrito')){
+              footerDentroListado= document.createElement('FOOTER')
+            }else{
+                footerDentroListado= document.querySelector('.footerCarrito')
+            }
+
+            contenedorPrincipal.innerHTML = '';
+            contenedorPrincipal.style.animation = 'aparecerArea 1s forwards'
+
+            const datos = await leerObjetos('datos');
+            const lista = document.createElement('UL')
+
+            lista.classList.add('listadoProductos')
+            if (datos.length > 1) {
+
+                for (let dato in datos) {
+                    if (datos[dato][1].productoCarrito != undefined) {
+
+                        let descripcion = datos[dato][1].productoCarrito[1][1];
+
+                        if (descripcion.length > 180) {
+                            descripcion = descripcion.substring(0, 180) + ' ...'
+                        }
+
+                        const nombre = datos[dato][1].productoCarrito[0]
+                        const urlImagen = datos[dato][1].productoCarrito[1][0]
+                        const cantidad = +datos[dato][1].cantidad
+                        let precioUnitario = datos[dato][1].productoCarrito[1][2].substring('1')
+                        precioUnitario = +precioUnitario.replaceAll('.', '');
+                        const precioTotal = (precioUnitario * cantidad)
+                        precioTotalEnCarrito += precioTotal
+                        const li = document.createElement("li");
 
 
-            history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
+                        li.classList.add('listadoProductoCarrito')
 
-            contenedorElegirArea.style.animation = 'ocultarNotificacion 1s forwards';
+                        li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <img src="${urlImagen}" alt="${nombre}" style="width: 80px; height: auto; border: 1px solid #ccc;" />
+                               <div class="">
+                                 <h4 style="margin: 0;">${nombre.replace(/_/g, ' ')}</h4>
+                                 <p style="margin: 0;">${descripcion}</p>
+                                 <p style="margin: 0;">Cantidad: ${cantidad}</p>
+                                 <p style="margin: 0;">Precio unitario: $${precioUnitario}</p>
+                                 <strong class="precioTotalProducto">Precio total: $${darFormato(precioTotal.toString())}</strong>
+                                 <span hidden > </span>
+                               </div>
+                                <div id='${datos[dato][0]}' class="btnEliminarProductoCarrito"></div>
+                             </div>
+    `;
+
+                        lista.appendChild(li);
+                        divProductosEnElCarrito.appendChild(lista)
+                        divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
+                    }
+                }
+
+            } else {
+                let li = document.createElement('LI')
+                li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <div class="">
+                                 <h4 style="margin-left:10px; margin-top:20px;  ">No Hay productos en el carrito</h4>
+                             </div>
+    `;
+
+                lista.appendChild(li)
+                divProductosEnElCarrito.appendChild(lista)
+                divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
+
+            }
 
 
 
-        }
+
+            let footer = document.querySelector('footer')
+            let codigoHtmlFooter = footer.innerHTML;
+            footerDentroListado.innerHTML = codigoHtmlFooter;
+            footerDentroListado.classList.add('footerCarrito');
+
+            contenedorPrincipal.appendChild(divProductosEnElCarrito)
+            divProductosEnElCarrito.appendChild(footerDentroListado)
+            
+
+        moverFooter('footerCarrito')
+        this.colocarEvento();
+
+        divProductosEnElCarrito.style.animation = 'aparecerCarrito 1s forwards';
+
+        divTerminarCompra.style.animation = 'aparecerCarrito 1.9s forwards';
+
+
+        divTerminarCompra.className = 'divTerminarCompra';
+        cargarLugarDeEntrega()
+
+        //contenedor finalizar compra
+
+        const contenedor = document.createElement('DIV');
+        const enunciado = document.createElement('H1');
+        const lugarDespacho = document.createElement('H3')
+        const destino = document.createElement('H3');
+        const labelTotal = document.createElement('LABEL');
+        const total = document.createElement('H2');
+        const btnConfirmarCompra = document.createElement('BUTTON');
+        const labelModoDePago = document.createElement('LABEL');
+        const inputModoPago = document.createElement('INPUT');
+        const labelTargeta = document.createElement('LABEL')
+
+
+        contenedor.className = 'contenedorConfirmarCompra';
+
+        enunciado.textContent = 'Finalizá tu compra'
+
+        lugarDespacho.innerHTML = 'Desde: <b>Florencia, Santa Fe</b>';
+
+        destino.innerHTML = `Hasta: <b>${domicilio}, ${localidad}-${provincia} </b>`;
+
+        total.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
+        total.classList.add('precioTotalEnCarrito');
+
+        labelModoDePago.innerHTML = 'Método de pago: '
+        labelModoDePago.id = 'labelMetodoDePago'
+        labelTargeta.textContent = '      Mastercard finalizada en: 0092'
+        inputModoPago.type = 'radio'
+        inputModoPago.setAttribute('checked', '')
+
+
+
+        labelTotal.innerHTML = '<br>Precio Total:'
+
+        btnConfirmarCompra.textContent = 'Confirmar compra'
+        btnConfirmarCompra.id = 'confirmarCompra'
+        btnConfirmarCompra.addEventListener('click', async () => {
+            if (precioTotalEnCarrito > 0) {
+                if (confirm('Esta seguro de realizar la compra? ')) {
+                    const datos = await leerObjetos('datos');
+                    enviarNotificacion('Muchas gracias por tu compra, te avisaremos cuando llegue tu producto')
+                    let productosEnElCarrito = datos.filter(dato => dato[1].productoCarrito)
+                    productosEnElCarrito.forEach(async elemento => {
+                        await this.eliminar(elemento[0], { notificacion: 'no' })
+
+                    })
+                }
+            } else {
+                enviarNotificacion('No hay productos en el carrito')
+            }
+        })
+
+        contenedor.appendChild(enunciado);
+        contenedor.appendChild(lugarDespacho);
+        contenedor.appendChild(destino);
+        contenedor.appendChild(labelModoDePago);
+        contenedor.appendChild(inputModoPago)
+        contenedor.appendChild(labelTargeta)
+        contenedor.appendChild(labelTotal);
+        contenedor.appendChild(total);
+        contenedor.appendChild(btnConfirmarCompra);
+
+        divTerminarCompra.appendChild(contenedor)
+
+        contenedorPrincipal.style.animation = '';
+        contenedorPrincipal.appendChild(divTerminarCompra);
+
+        contenedorPrincipal.classList.add('carrito')
+        history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
+
+        contenedorElegirArea.style.animation = 'desaparecerArea 0.3s forwards';
+
+
+        this.actualizarPrecio();
+
+
     }
 
 }
+
+}
+const sobreNosotros = () => {
+    const contenedorPrincipal = document.querySelector('.contenedorProductos');
+    const contenedorElegirArea = document.querySelector('.elegirArea')
+    const contenedorSobreNosotros = document.createElement('DIV')
+    contenedorElegirArea.style.animation = 'desaparecerArea 1s forwards'
+    contenedorPrincipal.innerHTML = ''
+
+    const htmlCode = `
+    
+     <h1>¡Bienvenidos a nuestra tienda online de artículos de pesca y carnadas!</h1>
+     <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Giménez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
+     <p>Este sitio web es el complemento de un proyecto de microemprendimiento que nació de nuestra pasión compartida por la pesca y el deseo de ofrecer productos de calidad a la comunidad pesquera.</p>
+    <p>Adán Ledesma, el creador de este espacio digital, invirtió más de 50 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementacion final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
+
+    <p>Pero somos más que solo un sitio web.  Somos un equipo comprometido con la excelencia, La innovación y el servicio al cliente. Nuestra misión es proporcionar a los pescadores de todas las edades y niveles de experiencia los mejores productos y el ascesoramiento experto que necesitan para disfrutar al máximo de su pasión.</p>
+    <p>¿Qué nos diferencia? Además de nuestra dedicación y experiencia, somos estudiantes que entendemos las necesidades y los desafíos de la comunidad local. Nos esforzamos por ofrecer precios competitivos, con una amplia selección  de productos y un servicio personalizado que supera las expectativas.</p>
+    <span >Este sitio fue creado con fines educativos y no cuenta con una funcionalidad real de envios, tampoco guardamos  información de los usuarios que visiten esta página. </span>
+    <p align='center'>Proyecto finalizado el 21 de octubre de 2025</p>
+    `
+    if (!document.querySelector('.contenedorSobreNosotros')) {
+        contenedorSobreNosotros.innerHTML = htmlCode;
+        contenedorSobreNosotros.className = 'contenedorSobreNosotros'
+        contenedorPrincipal.style.animation = 'aparecer 1s forwards';
+        contenedorPrincipal.appendChild(contenedorSobreNosotros);
+
+
+    } else {
+        contenedorPrincipal.style.animation = 'aparecer 1s forwards';
+        let contenedorSobreNosotrosVisible = document.querySelector('.contenedorSobreNosotros')
+        contenedorSobreNosotrosVisible.style.display = 'block';
+    }
+    moverFooter('defecto');
+
+}
+
+
 const carrito = new Carrito();
 carrito.classContenedorPrincipal = 'contenedorProductos';
-carrito.classContenedorElegirArea = 'elegirArea'
+carrito.classContenedorElegirArea = 'elegirArea';
 
 
 
