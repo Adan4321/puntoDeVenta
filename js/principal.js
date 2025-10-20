@@ -114,7 +114,7 @@ const productos = {
 }
 
 //escucha de eventos 
-document.querySelector('.zonaDeEntrega').addEventListener('click', e => {
+document.querySelectorAll('.zonaDeEntrega').forEach(label=> label.addEventListener('click', e => {
     let labelDireccionDeEntrega = document.querySelector('.zonaDeEntrega');
 
     e.preventDefault()
@@ -123,7 +123,7 @@ document.querySelector('.zonaDeEntrega').addEventListener('click', e => {
     } else {
         modificarZonaDeEntrega()
     }
-})
+}))
 document.getElementById('btnCargarCarnadas').addEventListener('click', () => {
     cargarProductos('carnadas');
     if (history.state.sitioActual != 'carnadas') history.pushState({ sitioActual: "carnadas" }, '', '#carnadas')
@@ -183,10 +183,10 @@ window.addEventListener('popstate', (e) => {
     }
 })
 
-document.querySelector('.lugarDespacho').addEventListener('click', e => {
+document.querySelectorAll('.lugarDespacho').forEach(label=>label.addEventListener('click', e => {
     e.preventDefault();
     abrirModal('mapaLugarDespacho')
-})
+}))
 
 document.getElementById('cuenta').addEventListener('click', async () => {
     await mostrarUsuario('pc');
@@ -282,11 +282,11 @@ const cargarLugarDeEntrega = () => {
                 domicilio = data[1].ubicacion[3]
                 keyUbicacion = data[0];
 
-                let labelDireccionDeEntrega = document.querySelector('.zonaDeEntrega');
+                let labelDireccionDeEntrega = document.querySelectorAll('.zonaDeEntrega');
                 if (domicilio.length > 18) {
-                    labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ...`
+                    labelDireccionDeEntrega.forEach(label=>label.textContent = `${domicilio}, ${localidad} ...`)
                 } else {
-                    labelDireccionDeEntrega.textContent = `${domicilio}, ${localidad} ${provincia}`
+                    labelDireccionDeEntrega.forEach(label=> label.textContent = `${domicilio}, ${localidad} ${provincia}`)
                 }
             }
         })
@@ -733,12 +733,12 @@ const mostrarUsuario = async (tipoDeApertura) => {
         if (tipoDeApertura == 'pc') {
             const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
             if (contenedorInfoLogin.classList.contains('active')) {
-                document.querySelector('.menuCuentaPc').style.animation = 'desaparecerArea 0.8s forwards'
+                document.querySelector('.menuCuentaPc').style.animation = 'desaparecerArea 0.2s forwards'
                 await new Promise(resolve => setTimeout(() => {
                     contenedorInfoLogin.classList.toggle('active')
                     resolve()
                     return
-                }, 700))
+                }, 500))
 
             } else {
                 contenedorInfoLogin.classList.toggle('active')
