@@ -100,7 +100,7 @@ const productos = {
         Reel_frontal_Nitro_500_metal: ["../img/productos/nitro 5000.webp", "Excelente calidad 2 rodamiento con capacidad para 30 M de linea", "$87.700"],
         Reel_frontal_XTI_sw_4000: ["../img/productos/XTI sw 4000.webp", "Excelente calidad 2 rodamiento con capacidad para 50 M de linea", "$78.300"],
         Caña_Silvertech_210: ["../img/productos/silvertech 210.webp", "Caña de fibra de vidrio de alta resistencia. 1.66 metros", "$62.700"],
-        caña_Mystix_infinity_198_MTS: ["../img/productos/caña mystix.webp", "Caña de pescar clasica Colony de fibra de vidrio. 1.66 metros", "$198.500"],
+        caña_Mystix_infinity_198_MTS: ["../img/productos/caña mystix.webp", "Caña de pescar clásica Colony de fibra de vidrio. 1.66 metros", "$198.500"],
         caña_Colony_aventura_MT: ["../img/productos/colony aventura.webp", "Caña de fibra reforzada de vidrio de alta resistencia. 2.0 metros", "$152.200"],
         anzuelos: ["../img/productos/anzuelos.webp", "Juego de anzuelos de varias medidas, desde 1/0 hasta 6 ", "$18.700"],
         Lider_de_Pesca: ["../img/productos/lider de pesca.webp", "10 lider pesca leader acero armado 20 cm", "$5.700"],
