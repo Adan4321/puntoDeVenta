@@ -223,9 +223,7 @@ nav li {
 
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
+
 
 #btnVerMas {
     color: blueviolet;
@@ -1283,6 +1281,9 @@ footer ul {
         display: inline-block;
         margin-top: 10px;
     } */
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     nav {
         height: 40px;
@@ -1551,29 +1552,33 @@ footer ul {
         padding: 10px;
         background: #ccccccaf;
         position: relative;
-        top:-40px;
-        border: dashed #0077ff 2px ;
+        top: -40px;
+        border: dashed #0077ff 2px;
     }
 
-    .contenedorConfirmarCompraCelular h1{
+    .contenedorConfirmarCompraCelular h1 {
         color: #0077ff;
         text-align: center;
         padding: 10px 0px;
     }
-    .contenedorConfirmarCompraCelular b{
-        color:#026a9b;
+
+    .contenedorConfirmarCompraCelular b {
+        color: #026a9b;
         font-weight: 500;
     }
-    .contenedorConfirmarCompraCelular label{
+
+    .contenedorConfirmarCompraCelular label {
         font-size: 20px;
     }
-    .contenedorConfirmarCompraCelular .precioTotalEnCarrito{
+
+    .contenedorConfirmarCompraCelular .precioTotalEnCarrito {
         color: #0aaf04;
         margin-top: 5px;
         display: inline-block;
         margin-left: 5px;
     }
-    .contenedorConfirmarCompraCelular  button{
+
+    .contenedorConfirmarCompraCelular button {
         display: block;
         margin: auto;
         margin-bottom: 20px;
@@ -1583,5 +1588,6 @@ footer ul {
         background: none;
         color: #0077ff;
     }
+
     /* --------------- */
 }
