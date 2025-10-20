@@ -144,14 +144,19 @@ window.addEventListener('load', () => {
 
 window.addEventListener('click', (e) => {
     const cuenta = document.querySelector('.menuCuentaPc');
-    const cuentaLaptop=document.querySelector('.menuCuentaLaptop');
+    const cuentaLaptop = document.querySelector('.menuCuentaLaptop');
     const contenedorSugerencias = document.querySelector('.contenedorSugerenciasBusqueda');
-
+    const contenedorSugerenciasMobile = document.querySelector('.contenedorSugerenciasBusqueda.mobile');
     if (!e.target.matches('#cuenta') && cuenta.classList.contains('active')) cerrarLogin('pc')
     if (!e.target.matches('#cuentaLaptop') && cuentaLaptop.classList.contains('menuCuentaActivo')) cerrarLogin('laptop')
 
     if (!e.target.matches('.contenedorSugerenciasBusqueda' && contenedorSugerencias.innerHTML != '')) {
         contenedorSugerencias.innerHTML = ''
+    }
+
+    if (!e.target.matches('.contenedorSugerenciasBusqueda.mobile' && contenedorSugerenciasMobile.innerHTML != '')) {
+        contenedorSugerenciasMobile.innerHTML = '';
+
     }
 
 
@@ -224,6 +229,15 @@ document.querySelector('.btnCerrarSesionLaptop').addEventListener('click', (e) =
 
 })
 
+document.querySelector('.btnCerrarSesionMobile').addEventListener('click', (e) => {
+    if (e.target.classList.contains('iniciarSesion')) {
+        iniciarSesion('mobile')
+    } else {
+        cerrarSesion('mobile')
+    }
+})
+
+
 document.getElementById('carritoLaptop').addEventListener('click', () => {
     carrito.mostrar('pc');
 })
@@ -231,9 +245,15 @@ document.getElementById('carritoLaptop').addEventListener('click', () => {
 
 
 document.getElementById('buscar').addEventListener('input', (e) => {
-    sugerirProductos()
-    e.target.setAttribute('autocomplete', 'none')
+    sugerirProductos('pc')
+    e.target.setAttribute('autocomplete', 'off')
 })
+
+document.getElementById('buscarMobile').addEventListener('input', (e) => {
+    sugerirProductos('celular')
+    e.target.setAttribute('autocomplete', 'off')
+})
+
 document.getElementById('buscar').addEventListener('click', () => {
     sugerirProductos()
 })
@@ -241,6 +261,13 @@ document.getElementById('buscar').addEventListener('click', () => {
 document.querySelector('.imgMenu').addEventListener('click', (e) => {
     abrirMenuDesplegable()
 })
+
+document.getElementById('buscarCelular').addEventListener('click', () => mostrarBuscadorCelular())
+
+document.getElementById('carritoCelular').addEventListener('click', () => {
+    carrito.mostrarCelular()
+})
+
 
 
 //funciones del header
@@ -583,15 +610,16 @@ const cargarProductos = (areaACargar) => {
     for (let area in productos) {
         if (areaACargar == area) {
             for (let nombreProducto in productos[area]) {
+                let nombreProductoFormateado;
                 if (nombreProducto.includes('_')) {
                     nombreProductoFormateado = nombreProducto.replaceAll('_', ' ');
                     if (nombreProductoFormateado.includes('media docena')) {
                         nombreProductoFormateado = nombreProductoFormateado.substring('0', nombreProductoFormateado.indexOf('media docena') - 1)
                     }
+
                 } else {
                     nombreProductoFormateado = nombreProducto;
                 }
-
                 const producto = document.createElement('DIV');
                 const img = document.createElement('IMG');
                 const nombreDelProducto = document.createElement('H3');
@@ -754,58 +782,65 @@ const iniciarSesion = async (modo) => {
         })
     await cerrarLogin(modo)
     abrirModal('iniciarSesion')
+    let btnCerrarSesion = document.querySelector('.btnCerrarSesionMobile')
+    btnCerrarSesion.textContent = 'Cerrar sesión';
+    btnCerrarSesion.classList.toggle('iniciarSesion');
+
 }
 
 const cargarUsuario = (modo) => {
     const nombreCompleto = document.querySelectorAll('.nombreYApellido');
     const fotoPerfil = document.querySelectorAll('.fotoPerfil');
-    let btnIniciarSesion;
-    if(modo=='pc')  btnCerrarSesion = document.querySelector('.btnCerrarSesion')
-        else btnCerrarSesion = document.querySelector('.btnCerrarSesionLaptop')
+    let btnCerrarSesion;
+    if (modo == 'pc') btnCerrarSesion = document.querySelector('.btnCerrarSesion')
+    if (modo == 'laptop') btnCerrarSesion = document.querySelector('.btnCerrarSesionLaptop')
+    if (modo == 'mobile') btnCerrarSesion = document.querySelector('.btnCerrarSesionMobile')
+
 
     if (nombreUsuario && fotoDePerfil) {
         for (let img of fotoPerfil) {
             img.src = fotoDePerfil;
         }
-       
+
         nombreCompleto.forEach(nombre => nombre.textContent = nombreUsuario)
 
 
     } else {
-        fotoPerfil.forEach(img=>img.src = '')
-        
-        nombreCompleto.forEach(nombre=>nombre.textContent='No se ha iniciado sesión')
+        fotoPerfil.forEach(img => img.src = '')
 
-        btnCerrarSesion.textContent = 'Iniciar Sesión'
+        nombreCompleto.forEach(nombre => nombre.textContent = 'No se ha iniciado sesión')
+
+        btnCerrarSesion.textContent = 'Iniciar Sesión';
         btnCerrarSesion.classList.add('iniciarSesion');
     }
 }
 
 const cerrarLogin = async (modo) => {
-    if(modo=='pc'){
-    const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
-    let imgFotoPerfil = document.getElementById('cuenta')
+    if (modo == 'pc') {
+        const contenedorInfoLogin = document.querySelector('.menuCuentaPc');
+        let imgFotoPerfil = document.getElementById('cuenta')
 
-    contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
-    await new Promise(resolve => setTimeout(() => {
-        contenedorInfoLogin.classList.toggle('active')
-        imgFotoPerfil.classList.toggle('seccionActiva')
-        resolve()
-        return
-    }, 700))
-}
-if(modo=='laptop'){
-    const contenedorInfoLogin = document.querySelector('.menuCuentaLaptop');
-    let imgFotoPerfil = document.getElementById('cuentaLaptop')
+        contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
+        await new Promise(resolve => setTimeout(() => {
+            contenedorInfoLogin.classList.toggle('active')
+            imgFotoPerfil.classList.toggle('seccionActiva')
+            resolve()
+            return
+        }, 700))
+    }
+    if (modo == 'laptop') {
+        const contenedorInfoLogin = document.querySelector('.menuCuentaLaptop');
+        let imgFotoPerfil = document.getElementById('cuentaLaptop')
 
-    contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
-    await new Promise(resolve => setTimeout(() => {
-        contenedorInfoLogin.classList.toggle('active')
-        imgFotoPerfil.classList.toggle('seccionActiva');
-        resolve()
-        return
-    }, 700))
-}
+        contenedorInfoLogin.style.animation = 'desaparecerArea 0.8s forwards'
+        await new Promise(resolve => setTimeout(() => {
+            contenedorInfoLogin.classList.toggle('active')
+            imgFotoPerfil.classList.toggle('seccionActiva');
+            resolve()
+            return
+        }, 700))
+    }
+
 
 }
 
@@ -833,64 +868,129 @@ const enviarNotificacion = (mensaje) => {
     }, 3000)
 }
 
-const sugerirProductos = () => {
-    let input = document.getElementById('buscar').value;
-    const contenedorBusqueda = document.querySelector('.buscador');
-    const contenedorSugerencias = document.querySelector('.contenedorSugerenciasBusqueda')
-    const ul = document.createElement('UL')
-    let validadorDeEspacios = false;
+const sugerirProductos = (modo) => {
+    if (modo == 'pc') {
+        let input = document.getElementById('buscar').value;
+        const contenedorBusqueda = document.querySelector('.buscador');
+        const contenedorSugerencias = document.querySelector('.contenedorSugerenciasBusqueda')
+        const ul = document.createElement('UL')
+        let validadorDeEspacios = false;
 
-    contenedorSugerencias.innerHTML = ''
+        contenedorSugerencias.innerHTML = ''
 
-    let productosSimilares = []
-    ul.className = 'ulSugerenciasBusqueda';
+        let productosSimilares = []
+        ul.className = 'ulSugerenciasBusqueda';
 
-    if (input[0] == ' ' && input[1] != ' ') {
-        validadorDeEspacios = true;
-        input = input.substring(1)
-    } else if (input[0] != ' ') {
-        validadorDeEspacios = true;
-    }
-
-    if (input.length > 0 && validadorDeEspacios) {
-        for (let clasificacion in productos) {
-            for (let producto in productos[clasificacion]) {
-                if (producto.toLowerCase().includes((input.toLowerCase()))) {
-                    productosSimilares.push(producto);
-                }
-            }
+        if (input[0] == ' ' && input[1] != ' ') {
+            validadorDeEspacios = true;
+            input = input.substring(1)
+        } else if (input[0] != ' ') {
+            validadorDeEspacios = true;
         }
-        for (let producto of productosSimilares) {
-            const li = document.createElement('LI')
-            let productoTabulado;
-            if (producto.includes('_')) {
-                productoTabulado = producto.replaceAll('_', ' ');
-            } else {
-                productoTabulado = producto;
-            }
-            li.addEventListener('click', () => {
-                for (let clasificacion in productos) {
-                    for (let productoBuscado in productos[clasificacion]) {
-                        if (productoBuscado == producto) {
-                            mostrarProducto({ [productoBuscado]: productos[clasificacion][productoBuscado] });
-                        }
+
+        if (input.length > 0 && validadorDeEspacios) {
+            for (let clasificacion in productos) {
+                for (let producto in productos[clasificacion]) {
+                    if (producto.toLowerCase().includes((input.toLowerCase()))) {
+                        productosSimilares.push(producto);
                     }
                 }
+            }
+            for (let producto of productosSimilares) {
+                const li = document.createElement('LI')
+                let productoTabulado;
+                if (producto.includes('_')) {
+                    productoTabulado = producto.replaceAll('_', ' ');
+                } else {
+                    productoTabulado = producto;
+                }
+                li.addEventListener('click', () => {
+                    for (let clasificacion in productos) {
+                        for (let productoBuscado in productos[clasificacion]) {
+                            if (productoBuscado == producto) {
+                                document.getElementById('buscar').value = ''
+                                mostrarProducto({ [productoBuscado]: productos[clasificacion][productoBuscado] });
+                            }
+                        }
+                    }
 
-            })
-            li.textContent = productoTabulado;
-            ul.appendChild(li);
+                })
+                li.textContent = productoTabulado;
+                ul.appendChild(li);
+            }
+            if (productosSimilares.length == 0) {
+                const li = document.createElement('LI')
+                li.textContent = 'Ups... no tenemos en stock ese producto';
+                ul.appendChild(li);
+            }
         }
-        if (productosSimilares.length == 0) {
-            const li = document.createElement('LI')
-            li.textContent = 'Ups... no tenemos en stock ese producto';
-            ul.appendChild(li);
-        }
-
         contenedorSugerencias.appendChild(ul);
-
         contenedorBusqueda.appendChild(contenedorSugerencias)
     }
+    if (modo == 'celular') {
+        let input = document.getElementById('buscarMobile').value;
+        const contenedorBusqueda = document.querySelector('.buscadorCelular');
+        const contenedorSugerencias = document.querySelector('.contenedorSugerenciasBusqueda.mobile')
+        const ul = document.createElement('UL')
+        let validadorDeEspacios = false;
+
+        contenedorSugerencias.innerHTML = '';
+
+        let productosSimilares = []
+        ul.className = 'ulSugerenciasBusqueda';
+
+        if (input[0] == ' ' && input[1] != ' ') {
+            validadorDeEspacios = true;
+            input = input.substring(1)
+        } else if (input[0] != ' ') {
+            validadorDeEspacios = true;
+        }
+
+        if (input.length > 0 && validadorDeEspacios) {
+            for (let clasificacion in productos) {
+                for (let producto in productos[clasificacion]) {
+                    if (producto.toLowerCase().includes((input.toLowerCase()))) {
+                        productosSimilares.push(producto);
+                    }
+                }
+            }
+            for (let producto of productosSimilares) {
+                const li = document.createElement('LI')
+                let productoTabulado;
+                if (producto.includes('_')) {
+                    productoTabulado = producto.replaceAll('_', ' ');
+                } else {
+                    productoTabulado = producto;
+                }
+                li.addEventListener('click', () => {
+                    for (let clasificacion in productos) {
+                        for (let productoBuscado in productos[clasificacion]) {
+                            if (productoBuscado == producto) {
+                                document.getElementById('buscarMobile').value = ''
+                                mostrarBuscadorCelular()
+                                mostrarProducto({ [productoBuscado]: productos[clasificacion][productoBuscado] });
+                            }
+                        }
+                    }
+
+                })
+                li.textContent = productoTabulado;
+                ul.appendChild(li);
+            }
+            if (productosSimilares.length == 0) {
+                const li = document.createElement('LI')
+                li.textContent = 'Ups... no tenemos en stock ese producto';
+                ul.appendChild(li);
+            }
+
+
+        }
+        contenedorSugerencias.appendChild(ul);
+        contenedorBusqueda.appendChild(contenedorSugerencias)
+
+    }
+
+
 }
 const mostrarProducto = producto => {
     const contenedorPrincipal = document.querySelector('.contenedorProductos');
@@ -906,6 +1006,7 @@ const mostrarProducto = producto => {
 
 
     contenedorPrincipal.innerHTML = '';
+    contenedorPrincipal.style.display = 'flex'
 
 
     if (nombreProducto.includes('_')) {
@@ -1015,33 +1116,50 @@ class Carrito {
     classContenedorPrincipal = ''
     classContenedorElegirArea = ''
     productosComprados = {}
-    colocarEvento() {
+    colocarEvento(modo) {
         let elementos = document.querySelectorAll('.btnEliminarProductoCarrito')
-        elementos.forEach(elemento => {
-            elemento.addEventListener('click', () => {
-                if (confirm('Esta seguro de quitar este producto? ')) {
-                    carrito.eliminar(elemento.id)
-                }
+        if (modo == 'celular') {
+            elementos.forEach(elemento => {
+                elemento.addEventListener('click', () => {
+                    if (confirm('Esta seguro de quitar este producto? ')) {
+                        carrito.eliminar(elemento.id, null, 'celular')
+                    }
+                })
             })
 
-        })
+        } else {
+            elementos.forEach(elemento => {
+                elemento.addEventListener('click', () => {
+                    if (confirm('Esta seguro de quitar este producto? ')) {
+                        carrito.eliminar(elemento.id, null, 'pc')
+                    }
+                })
+
+            })
+        }
 
     }
-    async eliminar(id, obj) {
+    async eliminar(id, obj, modo) {
 
         eliminarObjeto(+id, 'datos')
         if (!obj) {
             enviarNotificacion('Producto quitado');
         }
 
-        await this.actualizar()
+        if (modo == 'celular') {
+            await this.actualizar('celular')
+        }
+        if (modo == 'pc') {
+            await this.actualizar('pc')
+        }
+
         this.actualizarPrecio()
     }
 
 
     actualizarPrecio() {
 
-        const precioTotal = document.querySelector('.precioTotalEnCarrito')
+        const precioTotal = document.querySelectorAll('.precioTotalEnCarrito')
         precioTotalEnCarrito = 0
         const productos = document.querySelectorAll('.precioTotalProducto')
         productos.forEach(precio => {
@@ -1054,9 +1172,9 @@ class Carrito {
             precioTotalEnCarrito = 0
         }
 
-        precioTotal.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
+        precioTotal.forEach(precio =>precio.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`)
     }
-    async actualizar() {
+    async actualizar(modo) {
         const divProductosEnElCarrito = document.querySelector('.ProductosEnElCarrito');
         const divTerminarCompra = document.createElement('DIV');
 
@@ -1125,26 +1243,34 @@ class Carrito {
             divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
 
         }
+        if (modo == 'pc') {
+            let footerDentroListado;
+            if (!document.querySelector('.footerCarrito')) {
+                footerDentroListado = document.createElement('FOOTER')
+            } else {
+                footerDentroListado = document.querySelector('.footerCarrito')
+            }
+            let codigoFooter = document.querySelector('.footerCarrito').innerHTML;
+            divProductosEnElCarrito.innerHTML = '';
 
-        let footerDentroListado;
-        if (!document.querySelector('.footerCarrito')) {
-            footerDentroListado = document.createElement('FOOTER')
-        } else {
-            footerDentroListado = document.querySelector('.footerCarrito')
+            footerDentroListado.innerHTML = codigoFooter;
+            divProductosEnElCarrito.appendChild(lista);
+
+            footerDentroListado.classList.add('footerCarrito')
+
+            divProductosEnElCarrito.appendChild(footerDentroListado);
+            moverFooter('footerCarrito');
+            divProductosEnElCarrito.style.animation = 'actualizarCarrito 3s forwards'
+            this.colocarEvento('pc')
         }
-        let codigoFooter = document.querySelector('.footerCarrito').innerHTML;
-        divProductosEnElCarrito.innerHTML = '';
+        if (modo == 'celular') {
+            divProductosEnElCarrito.innerHTML = '';
+            divProductosEnElCarrito.appendChild(lista);
+            divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
 
-        footerDentroListado.innerHTML = codigoFooter;
-        divProductosEnElCarrito.appendChild(lista);
-
-        footerDentroListado.classList.add('footerCarrito')
-
-        divProductosEnElCarrito.appendChild(footerDentroListado);
-        moverFooter('footerCarrito');
-        divProductosEnElCarrito.style.animation = 'actualizarCarrito 3s forwards'
-
-        this.colocarEvento()
+            divProductosEnElCarrito.style.animation = 'actualizarCarrito 3s forwards'
+            this.colocarEvento('celular')
+        }
 
     }
     async mostrar(tipo) {
@@ -1207,7 +1333,7 @@ class Carrito {
                                  <strong class="precioTotalProducto">Precio total: $${darFormato(precioTotal.toString())}</strong>
                                  <span hidden > </span>
                                </div>
-                                <div id='${datos[dato][0]}' class="btnEliminarProductoCarrito"></div>
+                                <div id='${datos[dato][0]}' class="btnEliminarProductoCarrito celular"></div>
                              </div>
     `;
 
@@ -1245,7 +1371,7 @@ class Carrito {
 
 
             moverFooter('footerCarrito')
-            this.colocarEvento();
+            this.colocarEvento('pc');
 
             divProductosEnElCarrito.style.animation = 'aparecerCarrito 1s forwards';
 
@@ -1299,7 +1425,7 @@ class Carrito {
                         enviarNotificacion('Muchas gracias por tu compra, te avisaremos cuando llegue tu producto')
                         let productosEnElCarrito = datos.filter(dato => dato[1].productoCarrito)
                         productosEnElCarrito.forEach(async elemento => {
-                            await this.eliminar(elemento[0], { notificacion: 'no' })
+                            await this.eliminar(elemento[0], { notificacion: 'no' }, 'pc')
 
                         })
                     }
@@ -1327,8 +1453,6 @@ class Carrito {
             history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
 
             contenedorElegirArea.style.animation = 'desaparecerArea 0.3s forwards';
-
-
             this.actualizarPrecio();
 
 
@@ -1336,6 +1460,161 @@ class Carrito {
 
     }
 
+    async mostrarCelular() {
+        const contenedorPrincipal = document.querySelector('.' + this.classContenedorPrincipal);
+        const contenedorElegirArea = document.querySelector('.' + this.classContenedorElegirArea);
+        const divProductosEnElCarrito = document.createElement('DIV');
+        const divTerminarCompra = document.createElement('DIV');
+
+
+        contenedorPrincipal.innerHTML = '';
+        contenedorPrincipal.style.display = 'block';
+        contenedorPrincipal.style.animation = 'aparecerArea 1s forwards'
+
+        const datos = await leerObjetos('datos');
+        const lista = document.createElement('UL')
+
+        lista.classList.add('listadoProductos')
+        if (datos.length > 1) {
+
+            for (let dato in datos) {
+
+                if (datos[dato][1].productoCarrito != undefined) {
+
+                    let descripcion = datos[dato][1].productoCarrito[1][1];
+
+                    if (descripcion.length > 180) {
+                        descripcion = descripcion.substring(0, 180) + ' ...'
+                    }
+
+                    const nombre = datos[dato][1].productoCarrito[0]
+                    const urlImagen = datos[dato][1].productoCarrito[1][0]
+                    const cantidad = +datos[dato][1].cantidad
+                    let precioUnitario = datos[dato][1].productoCarrito[1][2].substring('1')
+                    precioUnitario = +precioUnitario.replaceAll('.', '');
+                    const precioTotal = (precioUnitario * cantidad)
+                    precioTotalEnCarrito += precioTotal
+                    const li = document.createElement("li");
+
+
+                    li.classList.add('listadoProductoCarrito')
+
+                    li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <img src="${urlImagen}" alt="${nombre}" style="width: 80px; height: auto; border: 1px solid #ccc;" />
+                               <div class="">
+                                 <h4 style="margin: 0;">${nombre.replace(/_/g, ' ')}</h4>
+                                 <p style="margin: 0;">${descripcion}</p>
+                                 <p style="margin: 0;">Cantidad: ${cantidad}</p>
+                                 <p style="margin: 0;">Precio unitario: $${precioUnitario}</p>
+                                 <strong class="precioTotalProducto">Precio total: $${darFormato(precioTotal.toString())}</strong>
+                                 <span hidden > </span>
+                               </div>
+                                <div id='${datos[dato][0]}' class="btnEliminarProductoCarrito"></div>
+                             </div>
+    `;
+
+                    lista.appendChild(li);
+                    divProductosEnElCarrito.appendChild(lista)
+                    divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
+                }
+
+            }
+
+        } else {
+            let li = document.createElement('LI')
+            li.innerHTML = `
+                             <div style="display: flex; align-items: center; gap: 1em; margin-bottom: 10px;">
+                               <div class="">
+                                 <h4 style="margin-left:10px; margin-top:20px; font-size:20px ">No Hay productos en el carrito</h4>
+                             </div>
+    `;
+
+            lista.appendChild(li)
+            divProductosEnElCarrito.appendChild(lista)
+            divProductosEnElCarrito.classList.add('ProductosEnElCarrito')
+        }
+
+        contenedorPrincipal.appendChild(divProductosEnElCarrito);
+        this.colocarEvento('celular')
+        abrirMenuDesplegable()
+        history.pushState({ sitioActual: "carrito" }, ' ', '#carrito');
+
+        contenedorElegirArea.style.animation = 'desaparecerArea 0.3s forwards';
+        this.actualizarPrecio();
+        divProductosEnElCarrito.style.animation = 'aparecerCarrito 1s forwards';
+
+        divTerminarCompra.style.animation = 'aparecerCarrito 1.9s forwards';
+
+
+        const contenedor = document.createElement('DIV');
+        const enunciado = document.createElement('H1');
+        const lugarDespacho = document.createElement('H3')
+        const destino = document.createElement('H3');
+        const labelTotal = document.createElement('LABEL');
+        const total = document.createElement('H2');
+        const btnConfirmarCompra = document.createElement('BUTTON');
+        const labelModoDePago = document.createElement('LABEL');
+        const inputModoPago = document.createElement('INPUT');
+        const labelTargeta = document.createElement('LABEL')
+
+
+        contenedor.className = 'contenedorConfirmarCompraCelular';
+
+        enunciado.textContent = 'Finalizá tu compra'
+
+        lugarDespacho.innerHTML = 'Desde: <b>Florencia, Santa Fe</b>';
+
+        destino.innerHTML = `Hasta: <b>${domicilio}, ${localidad}-${provincia} </b>`;
+
+        total.textContent = `$${darFormato(precioTotalEnCarrito.toString())}`
+        total.classList.add('precioTotalEnCarrito');
+
+        labelModoDePago.innerHTML = 'Método de pago: '
+        labelModoDePago.id = 'labelMetodoDePago'
+        labelTargeta.textContent = '      Mastercard finalizada en: 0092'
+        inputModoPago.type = 'radio'
+        inputModoPago.setAttribute('checked', '')
+
+
+
+        labelTotal.innerHTML = '<br>Precio Total:'
+
+        btnConfirmarCompra.textContent = 'Confirmar compra'
+        btnConfirmarCompra.id = 'confirmarCompra'
+        btnConfirmarCompra.addEventListener('click', async () => {
+            if (precioTotalEnCarrito > 0) {
+                if (confirm('Esta seguro de realizar la compra? ')) {
+                    const datos = await leerObjetos('datos');
+                    enviarNotificacion('Muchas gracias por tu compra, te avisaremos cuando llegue tu producto')
+                    let productosEnElCarrito = datos.filter(dato => dato[1].productoCarrito)
+                    productosEnElCarrito.forEach(async elemento => {
+                        await this.eliminar(elemento[0], { notificacion: 'no' }, 'celular')
+
+                    })
+                }
+            } else {
+                enviarNotificacion('No hay productos en el carrito')
+            }
+        })
+
+        contenedor.appendChild(enunciado);
+        contenedor.appendChild(lugarDespacho);
+        contenedor.appendChild(destino);
+        contenedor.appendChild(labelModoDePago);
+        contenedor.appendChild(inputModoPago)
+        contenedor.appendChild(labelTargeta)
+        contenedor.appendChild(labelTotal);
+        contenedor.appendChild(total);
+        contenedor.appendChild(btnConfirmarCompra);
+
+        divTerminarCompra.appendChild(contenedor)
+
+        contenedorPrincipal.style.animation = '';
+        contenedorPrincipal.appendChild(divTerminarCompra);
+
+
+    }
 }
 const sobreNosotros = () => {
     const contenedorPrincipal = document.querySelector('.contenedorProductos');
@@ -1355,12 +1634,12 @@ const sobreNosotros = () => {
      <h1>¡Bienvenidos a nuestra tienda online de artículos de pesca y carnadas!</h1>
      <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Giménez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
      <p>Este sitio web es el complemento de un proyecto de microemprendimiento que nació de nuestra pasión compartida por la pesca y el deseo de ofrecer productos de calidad a la comunidad pesquera.</p>
-    <p>Adán Ledesma, el creador de este espacio digital, invirtió más de 50 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementacion final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
+    <p>Adán Ledesma, el creador de este espacio digital, invirtió más de 57 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementacion final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
 
     <p>Pero somos más que solo un sitio web.  Somos un equipo comprometido con la excelencia, La innovación y el servicio al cliente. Nuestra misión es proporcionar a los pescadores de todas las edades y niveles de experiencia los mejores productos y el ascesoramiento experto que necesitan para disfrutar al máximo de su pasión.</p>
     <p>¿Qué nos diferencia? Además de nuestra dedicación y experiencia, somos estudiantes que entendemos las necesidades y los desafíos de la comunidad local. Nos esforzamos por ofrecer precios competitivos, con una amplia selección  de productos y un servicio personalizado que supera las expectativas.</p>
     <span >Este sitio fue creado con fines educativos y no cuenta con una funcionalidad real de envios, tampoco guardamos  información de los usuarios que visiten esta página. </span>
-    <p align='center'>Proyecto finalizado el 21 de octubre de 2025</p>
+    <p align='center'>Proyecto finalizado el 20 de octubre de 2025</p>
     `
 
         if (!document.querySelector('.contenedorSobreNosotros')) {
@@ -1393,6 +1672,23 @@ const abrirMenuDesplegable = () => {
     })
 }
 
+const mostrarBuscadorCelular = () => {
+    const divBuscador = document.querySelector('.buscadorCelular');
+    const imgBuscador = document.getElementById('buscarCelular');
+    const imgMenu = document.querySelector('.imgMenu');
+    if (divBuscador.style.display != 'block') {
+        divBuscador.style.display = 'block'
+        imgBuscador.style.left = '340px'
+        imgMenu.style.display = 'none';
+
+    } else {
+        divBuscador.style.display = 'none'
+        imgBuscador.removeAttribute('style')
+        imgMenu.style.display = 'inline-block';
+    }
+}
+
+
 const carrito = new Carrito();
 carrito.classContenedorPrincipal = 'contenedorProductos';
 carrito.classContenedorElegirArea = 'elegirArea';
@@ -1400,7 +1696,3 @@ carrito.classContenedorElegirArea = 'elegirArea';
 
 const contenedorProductos = document.querySelector('.contenedorProductos');
 contenedorProductos.style.display = 'none';
-
-
-
-

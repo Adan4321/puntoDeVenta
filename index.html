@@ -39,10 +39,10 @@
 
 
             <div class="buscador">
-                <div class="busqueda backgroundImgBuscar">
+                <div class=" backgroundImgBuscar">
                     <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
                 </div>
-                <input class="busqueda" id="buscar" autocomplete="none" placeholder="¿Qué Buscas Hoy ?" type="text">
+                <input class="busqueda" id="buscar" autocomplete="off" placeholder="¿Qué Buscas Hoy ?" type="text">
                 <div class="contenedorSugerenciasBusqueda">
                 </div>
 
@@ -70,48 +70,51 @@
                 <img src="./img/imgCuentaBlanco.png" id="cuentaLaptop" alt="">
                 <img src="./img/imgCarritoBlanco.png" id="carritoLaptop" alt="">
 
-                 <div class="menuCuentaLaptop">
+                <div class="menuCuentaLaptop">
                     <img class="fotoPerfil" src="" alt="">
                     <h3 class="nombreYApellido"></h3>
                     <button class="btnCerrarSesionLaptop">Cerrar Sesión</button>
                 </div>
             </div>
-            <img src="./img/imgBuscar.png" id="buscarCelular" alt="">
-            <img src="./img/imgMenu.png" class="imgMenu" alt="">
+            <div class="buscadorCelular ">
+                <input class="busqueda" id="buscarMobile" autocomplete="off" placeholder="¿Qué Buscas Hoy ?" type="text">
+                <div class="contenedorSugerenciasBusqueda mobile">
+                </div>
+            </div>
+                <img src="./img/imgBuscar.png" id="buscarCelular" alt="">
+                <img src="./img/imgMenu.png" class="imgMenu" alt="">
 
 
-            <!-- menu de laptop -->
-            <div class="menuDesplegableLaptop">
+                <!-- menu de laptop -->
+                <div class="menuDesplegableLaptop">
+                    <!-- celular -->
+                    <div class="cuentaCelular">
+                        <img class="fotoPerfil" src="" alt="">
+                        <h3 class="nombreYApellido"></h3>
+                        <button class="btnCerrarSesionMobile">Cerrar Sesión</button>
+                    </div>
+                    <img src="./img/imgCarritoBlanco.png" id="carritoCelular" alt="">
 
-                <div class="localLaptop">
-                    <img src="" alt="">
-                    <h3>Nuestra tienda:</h3>
-                    <a href="" class="lugarDespacho">Florencia, Santa Fe</a>
+
+                    <!-- ------- -->
+
+                    <div class="localLaptop">
+                        <img src="" alt="">
+                        <h3>Nuestra tienda:</h3>
+                        <a href="" class="lugarDespacho">Florencia, Santa Fe</a>
+
+                    </div>
+                    <div class="EnviosLaptop">
+                        <img src="" id="EnvioDomicilio" alt="">
+                        <h3>Tu domicilio:</h3>
+                        <a href="#" class="zonaDeEntrega">Elegir zona de entrega:</a>
+                    </div>
+
 
                 </div>
-                <div class="EnviosLaptop">
-                    <img src="" id="EnvioDomicilio" alt="">
-                    <h3>Tu domicilio:</h3>
-                    <a href="#" class="zonaDeEntrega">Elegir zona de entrega:</a>
-                </div>
+                <!-- ------------------------------------- -->
 
 
-            </div>
-            <!-- ------------------------------------- -->
-
-            <div class="menuCelular" style="display:none;">
-                <ul>
-                    <li>
-                        <div class="busqueda backgroundImgBuscar">
-                            <img src="./img/imgBuscar.png" id="imgBuscar" alt="">
-                        </div>
-                        <input class="busqueda" id="buscar" autocomplete="none" placeholder="¿Qué Buscas Hoy ?"
-                            type="text">
-                        <div class="contenedorSugerenciasBusqueda">
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </nav>
     </header>
     <!--- contenido Principal-->

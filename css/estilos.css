@@ -64,7 +64,8 @@ header {
 
 }
 
-#buscar {
+#buscar,
+#buscarMobile {
     height: 30px;
     border-radius: 5px;
     padding: 5px;
@@ -79,7 +80,8 @@ header {
     display: inline-block;
 }
 
-#buscar::placeholder {
+#buscar::placeholder,
+#buscarMobile::placeholder {
     padding-left: 10px;
 }
 
@@ -133,7 +135,7 @@ header {
     right: 40px;
     height: 50px;
     top: 22px;
-    
+
 }
 
 #cuenta,
@@ -256,9 +258,11 @@ footer {
     text-align: center;
     z-index: 9999;
 }
-.footerActivo{
+
+.footerActivo {
     display: block;
 }
+
 #spanCreador,
 #derechos {
     display: block;
@@ -399,7 +403,7 @@ footer ul {
 .elegirArea {
     padding-top: 30px;
     background-image: url("../img/fondo\ articulos\ de\ pescajpg.jpg");
-     background-size: cover;
+    background-size: cover;
 }
 
 .opciones {
@@ -419,15 +423,17 @@ footer ul {
     color: #0077ff;
     text-shadow: 1px 1px 0px black;
 }
-.targetaDeSeleccion.pesca{
-     background-image: url("../img/fondo\ articulos\ de\ pescajpg.jpg");
+
+.targetaDeSeleccion.pesca {
+    background-image: url("../img/fondo\ articulos\ de\ pescajpg.jpg");
     position: relative;
     background-size: cover;
     backdrop-filter: blur(1px);
 
 
 }
-.targetaDeSeleccion.pesca::before{
+
+.targetaDeSeleccion.pesca::before {
     content: "";
     position: absolute;
     top: 0;
@@ -435,7 +441,7 @@ footer ul {
     width: 100%;
     height: 100%;
     background-image: inherit;
-     background-size: cover;
+    background-size: cover;
     filter: blur(1px);
     z-index: -1;
 }
@@ -456,18 +462,20 @@ footer ul {
     height: 180px;
     list-style-position: inside;
     padding: 10px;
-     background-color: #ccccccad;
-     border-radius: 10px;
+    background-color: #ccccccad;
+    border-radius: 10px;
 }
-.targetaDeSeleccion.carnadas{
-     background-image: url("../img/fondo\ carnadas.jpg");
+
+.targetaDeSeleccion.carnadas {
+    background-image: url("../img/fondo\ carnadas.jpg");
     position: relative;
     background-size: cover;
     backdrop-filter: blur(1px);
 
 
 }
-.targetaDeSeleccion.carnadas::before{
+
+.targetaDeSeleccion.carnadas::before {
     content: "";
     position: absolute;
     top: 0;
@@ -475,7 +483,7 @@ footer ul {
     width: 100%;
     height: 100%;
     background-image: inherit;
-     background-size: cover;
+    background-size: cover;
     filter: blur(2px);
     z-index: -1;
 }
@@ -485,7 +493,7 @@ footer ul {
     top: 10px;
     left: 40px;
     padding: 10px 30px;
-     background: #b4b4b4;
+    background: #b4b4b4;
     border: #1e72d2 solid 2px;
     border-radius: 10px;
     color: #0c5cb8;
@@ -538,7 +546,7 @@ footer ul {
     border-bottom: 18px solid #134277;
 }
 
-.menuCuentaLaptop.menuCuentaActivo{
+.menuCuentaLaptop.menuCuentaActivo {
     display: block;
 }
 
@@ -563,7 +571,7 @@ footer ul {
     color: #1e72d2;
     border-radius: 10px;
     position: relative;
-    
+
 }
 
 .menuCuentaPc button:hover {
@@ -576,7 +584,7 @@ footer ul {
     border: #1ed287 solid 1px;
 }
 
-.menuCuentaLaptop{
+.menuCuentaLaptop {
     position: absolute;
     display: none;
     background-color: #13427780;
@@ -594,6 +602,7 @@ footer ul {
     transition: all 1s;
     animation: aparecerArea 0.5s forwards;
 }
+
 .menuCuentaLaptop::before {
     position: absolute;
     content: '';
@@ -606,6 +615,7 @@ footer ul {
     border-right: 18px solid transparent;
     border-bottom: 18px solid #134277;
 }
+
 .menuCuentaLaptop h3 {
     text-align: center;
     text-transform: capitalize;
@@ -622,7 +632,7 @@ footer ul {
     color: #1e72d2;
     border-radius: 10px;
     position: relative;
-    
+
 }
 
 .menuCuentaLaptop button:hover {
@@ -829,7 +839,7 @@ footer ul {
 
 
 /* estilo sobre nosotros */
-.contenedorSobreNosotros{
+.contenedorSobreNosotros {
     padding: 30px;
     text-indent: 30px;
     background: #0077ff;
@@ -840,7 +850,8 @@ footer ul {
     margin-bottom: 30px;
     z-index: 1;
 }
-.contenedorSobreNosotros h1{
+
+.contenedorSobreNosotros h1 {
     text-align: center;
 
 }
@@ -864,7 +875,8 @@ footer ul {
     background-color: #d3e1ffd7;
     backdrop-filter: blur(3px);
 }
-.btnEliminarProductoCarrito:hover{
+
+.btnEliminarProductoCarrito:hover {
     background-color: #6d6d6d;
 }
 
@@ -873,6 +885,7 @@ footer ul {
 .footerCarrito ul {
     list-style: none;
 }
+
 .contenedorProductos.carrito {
     display: grid;
     grid-template-columns: 70% 30%;
@@ -884,7 +897,7 @@ footer ul {
     position: relative;
     padding-top: 0px;
     height: 100%;
-    
+
 }
 
 .ProductosEnElCarrito {
@@ -897,15 +910,16 @@ footer ul {
     margin-bottom: -20px;
     min-height: 80vh;
 }
+
 .footerCarrito {
     text-align: center;
     position: absolute;
     bottom: 0px;
-    width: 100%;    
+    width: 100%;
 
 }
 
-.ProductosEnElCarrito .listadoProductos{
+.ProductosEnElCarrito .listadoProductos {
     padding-bottom: 97px;
     overflow-y: auto;
 }
@@ -954,7 +968,8 @@ footer ul {
     font-size: 20px;
     font-weight: 200;
 }
-#labelMetodoDePago{
+
+#labelMetodoDePago {
     display: block;
     margin-top: 15%;
 }
@@ -970,14 +985,27 @@ footer ul {
     border-radius: 10px;
 
 }
-#confirmarCompra:hover{
-    background:  #777;
+
+#confirmarCompra:hover {
+    background: #777;
     color: #fff;
 }
-.menuDesplegableLaptop{
+
+.menuDesplegableLaptop {
     display: none;
 }
 
+.cuentaCelular {
+    display: none;
+}
+
+#carritoCelular {
+    display: none;
+}
+
+.buscadorCelular {
+    display: none;
+}
 
 @keyframes spin {
     0% {
@@ -1065,15 +1093,17 @@ footer ul {
         opacity: 1;
     }
 }
+
 @keyframes actualizarCarrito {
-    from{
+    from {
         height: 0;
-      
+
     }
-    to{
-      height: auto;
+
+    to {
+        height: auto;
     }
-    
+
 }
 
 @keyframes desaparecerCarrito {
@@ -1130,9 +1160,10 @@ footer ul {
         height: 0;
         opacity: 0;
     }
+
     100% {
         display: block;
-        height: 180px;
+
         opacity: 1;
     }
 }
@@ -1140,7 +1171,6 @@ footer ul {
 @keyframes desaparecerMenu {
     0% {
         opacity: 1;
-        height: 180px;
         display: block;
     }
 
@@ -1149,11 +1179,12 @@ footer ul {
         height: 0;
         opacity: 0;
         display: none;
-        
+
 
     }
 
 }
+
 /* ---------------- */
 
 @keyframes desaparecer {
@@ -1175,13 +1206,16 @@ footer ul {
         display: block;
         margin-left: 0px;
     }
-    header{
+
+    header {
         height: 168px;
     }
-    .elegirArea{
+
+    .elegirArea {
         padding-top: 80px;
         background-size: unset;
     }
+
     #buscar {
         width: 90%;
         margin-left: 0px;
@@ -1199,41 +1233,45 @@ footer ul {
         top: 8px;
     }
 
-    .menuCelular.activo{
+    .menuCelular.activo {
         display: block;
     }
+
     /* menu desplegable laptop */
-    .menuDesplegableLaptop{
-    display: none;
-    background-color: #00418bd2;
-    position: absolute;
-    right: 0px;
-    top: 60px;
-    width: 30%;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    padding: 20px;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    height: 180px;
-    backdrop-filter: blur(3px);
+    .menuDesplegableLaptop {
+        display: none;
+        background-color: #00418bd2;
+        position: absolute;
+        right: 0px;
+        top: 60px;
+        width: 30%;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 20px;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        height: 180px;
+        backdrop-filter: blur(3px);
     }
-    .activo{
+
+    .activo {
         display: block;
         animation-name: aparecerMenu;
     }
-    .inactivo{
+
+    .inactivo {
         animation-name: desaparecerMenu;
     }
 
-    .menuDesplegableLaptop .localLaptop, .menuDesplegableLaptop .EnviosLaptop {
+    .menuDesplegableLaptop .localLaptop,
+    .menuDesplegableLaptop .EnviosLaptop {
         display: block;
         position: relative;
 
     }
 
-    .menuDesplegableLaptop a{
+    .menuDesplegableLaptop a {
         color: #1ed287;
         text-decoration: none;
         font-size: 19px;
@@ -1257,9 +1295,10 @@ footer ul {
 
     .contenedorProductos {
         padding-top: 40px;
-    
+
     }
-    .contenedorConfirmarCompra{
+
+    .contenedorConfirmarCompra {
         width: auto;
     }
 
@@ -1291,17 +1330,11 @@ footer ul {
     #logo {
         margin-left: -30px;
     }
-    .listadoProductos{
+
+    .listadoProductos {
         padding-top: 17px;
     }
-    /* .ProductosEnElCarrito{
-        width: 70%;
-    }
-    .divTerminarCompra{
-        width: 80%;
-        position: relative;
-        left: calc(-70%);
-    } */
+
 
 
 }
@@ -1311,10 +1344,11 @@ footer ul {
     text-align: center;
 
 }
+
 @media (width<=973px) {
     .contenedorProductos {
 
-        grid-template-columns:60% 40% !important;        
+        grid-template-columns: 60% 40% !important;
     }
 }
 
@@ -1326,6 +1360,18 @@ footer ul {
 
     header #imgFlechaDerecha {
         display: none;
+    }
+
+    .elegirArea {
+        padding-top: 10px;
+    }
+
+    header {
+        height: 95px;
+    }
+
+    .barraNavSuperior {
+        height: 20px;
     }
 
     .enunciados {
@@ -1340,7 +1386,7 @@ footer ul {
     }
 
     .barraNavSuperior {
-        height: 120px;
+        height: 132px;
     }
 
     #buscarCelular {
@@ -1364,8 +1410,178 @@ footer ul {
 
     ul {
         font-size: 13px;
+        margin-top: 9px !important;
+
     }
-    .loginMobile{
+
+    .loginMobile {
         display: none;
     }
+
+    .menuDesplegableLaptop {
+        right: 0px;
+        top: 60px;
+        width: 90%;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 20px;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        padding-bottom: 90px;
+        backdrop-filter: blur(3px);
+    }
+
+    .localLaptop {
+        padding-top: 40px;
+    }
+
+    .cuentaCelular {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .cuentaCelular img {
+        display: inline-block;
+        width: 50px;
+        position: absolute;
+        margin: 0px;
+        left: 20px;
+    }
+
+    .cuentaCelular h3 {
+        display: inline-block;
+        position: absolute;
+        top: 45px;
+        left: calc(35% - 38px);
+        font-size: 18px;
+    }
+
+    .btnCerrarSesionMobile {
+        display: inline-block;
+        position: absolute;
+        bottom: 20px;
+        left: calc(50% - 50px);
+        background: #cccccc9f;
+        padding: 5px 10px;
+        border: #ccc solid 1px;
+        border-radius: 10px;
+        color: #d21e1e;
+    }
+
+    #carritoCelular {
+        display: inline-block;
+        width: 46px;
+        position: absolute;
+        cursor: pointer;
+        top: 30px;
+        left: calc(93% - 40px);
+        z-index: 200;
+
+    }
+
+    .tarjetaProducto {
+        width: 70%;
+        margin-top: 0px;
+    }
+
+    .tarjetaProducto img {
+        width: 270px;
+        margin-left: calc(30% - 80px);
+    }
+
+    .tarjetaProducto .btnAagregar {
+        margin-left: calc(50% - 85px) !important;
+    }
+
+    .notificacion {
+        right: 0px;
+    }
+
+    .producto button:hover {
+        background: none;
+        color: #1e72d2;
+
+    }
+
+    .contenedorSugerenciasBusqueda li {
+        display: block;
+
+    }
+
+    .contenedorSugerenciasBusqueda {
+        height: auto;
+        max-height: 500px;
+        overflow: auto;
+        position: relative;
+        left: -10px;
+        top: 16px;
+        width: 330px;
+    }
+
+    #buscarMobile {
+        position: absolute;
+        left: -20px;
+        top: -1px;
+        padding: 15px;
+        width: 300px;
+    }
+
+    .ProductosEnElCarrito {
+        padding-top: 0px !important;
+        position: relative;
+        top: -49px;
+        width: 100%;
+    }
+
+    .ProductosEnElCarrito ul {
+        padding-top: 0px;
+
+    }
+
+    .ProductosEnElCarrito .listadoProductos {
+        padding-bottom: 0px;
+    }
+
+    /* estilo del contenedor finalizar compra */
+    .contenedorConfirmarCompraCelular {
+        display: block;
+        width: 90%;
+        margin: auto;
+        padding: 10px;
+        background: #ccccccaf;
+        position: relative;
+        top:-40px;
+        border: dashed #0077ff 2px ;
+    }
+
+    .contenedorConfirmarCompraCelular h1{
+        color: #0077ff;
+        text-align: center;
+        padding: 10px 0px;
+    }
+    .contenedorConfirmarCompraCelular b{
+        color:#026a9b;
+        font-weight: 500;
+    }
+    .contenedorConfirmarCompraCelular label{
+        font-size: 20px;
+    }
+    .contenedorConfirmarCompraCelular .precioTotalEnCarrito{
+        color: #0aaf04;
+        margin-top: 5px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    .contenedorConfirmarCompraCelular  button{
+        display: block;
+        margin: auto;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: solid 1px #0077ff;
+        background: none;
+        color: #0077ff;
+    }
+    /* --------------- */
 }
