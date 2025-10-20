@@ -1632,10 +1632,11 @@ const sobreNosotros = () => {
         const htmlCode = `
     
      <h1>¡Bienvenidos a nuestra tienda online de artículos de pesca y carnadas!</h1>
-     <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Giménez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
+     <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Gimenez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
      <p>Este sitio web es el complemento de un proyecto de microemprendimiento que nació de nuestra pasión compartida por la pesca y el deseo de ofrecer productos de calidad a la comunidad pesquera.</p>
     <p>Adán Ledesma, el creador de este espacio digital, invirtió más de 57 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementación final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
-
+    <p>Nahuel Gimenez es el encargado de la crianza y cuidado de las carnadas, también, se encarga de preparar los tanques o piletones para nuevas carnadas y lograr que todo sea igual que su hábitat, así ustedes adquieren la mejor carnada</p>
+    <p>Alan Suarez se encarga de repartir a domicilio tus compras(carnadas o elementos de pesca), también se encarga de las compras de alimentos para las carnadas o herramientas  para ello</p>
     <p>Pero somos más que solo un sitio web.  Somos un equipo comprometido con la excelencia, la innovación y el servicio al cliente. Nuestra misión es proporcionar a los pescadores de todas las edades y niveles de experiencia los mejores productos y el asesoramiento experto que necesitan para disfrutar al máximo de su pasión.</p>
     <p>¿Qué nos diferencia? Además de nuestra dedicación y experiencia, somos estudiantes que entendemos las necesidades y los desafíos de la comunidad local. Nos esforzamos por ofrecer precios competitivos, con una amplia selección  de productos y un servicio personalizado que supera las expectativas.</p>
     <span >Este sitio fue creado con fines educativos y no cuenta con una funcionalidad real de envios, tampoco guardamos  información de los usuarios que visiten esta página. </span>
