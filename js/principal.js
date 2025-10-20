@@ -103,7 +103,7 @@ const productos = {
         caña_Mystix_infinity_198_MTS: ["../img/productos/caña mystix.webp", "Caña de pescar clásica Colony de fibra de vidrio. 1.66 metros", "$198.500"],
         caña_Colony_aventura_MT: ["../img/productos/colony aventura.webp", "Caña de fibra reforzada de vidrio de alta resistencia. 2.0 metros", "$152.200"],
         anzuelos: ["../img/productos/anzuelos.webp", "Juego de anzuelos de varias medidas, desde 1/0 hasta 6 ", "$18.700"],
-        Lider_de_Pesca: ["../img/productos/lider de pesca.webp", "10 lider pesca leader acero armado 20 cm", "$5.700"],
+        Lider_de_Pesca: ["../img/productos/lider de pesca.webp", "10 lideres de pesca de acero armado 20 cm", "$5.700"],
         Lider_de_acero_para_pesca: ["../img/productos/lider de pesca acero armado.webp", "Kit de 5 lideres de pesca  acero armado 15 cm", "$3.500"],
         lineas_para_pescar_Grillon: ["../img/productos/linea para pescar grillon.webp", "lineas ultra resistentes soporta 22,9 Kg 0.60 mm 100 metros ", "$5.000"],
         lineas_para_pescar_Camou_line_050mm: ["../img/productos/linea de nylon.webp", "lineas de pesca Camou line 0.50 mm resiste hasta 32 Kg color verde 100 metros", "$5.000"],
