@@ -83,10 +83,10 @@ const productos = {
     carnadas: {
         Lombrices: ["../img/productos/Lombrices.jpg", "Bolsa de 100 gramos de Lombrices ", "$1.800"],
         Morena: ["../img/productos/morena.jpg", "100 gramos de morena embolsadas al  vacio", "$3.000"],
-        Cascarudo: ["../img/productos/cascarudo.jpg", "Una docena de la mejor calidad ", "$3.200"],
-        Cascarudo_media_docena: ["../img/productos/cascarudo.jpg", "Media docena de la mejor calidad", "$1.800"],
+        Cascarudo: ["../img/productos/cascarudo.jpg", "Una docena de la mejor calidad de cascarudos", "$3.200"],
+        Cascarudo_media_docena: ["../img/productos/cascarudo.jpg", "Media docena de cascarudos de la mejor calidad", "$1.800"],
         Anguila: ["../img/productos/anguilas.jpg", "Una docena de anguilas ", "$4.800"],
-        Anguila_media_docena: ["../img/productos/anguilas.jpg", "media docena", "$2.900"],
+        Anguila_media_docena: ["../img/productos/anguilas.jpg", "media docena de anguilas", "$2.900"],
         Sabalitos: ["../img/productos/sabalitos.jpg", "Una docena de sabalitos, ideal para pescar en ríos pequeños", "$3.200"],
         Sabalitos_media_docena: ["../img/productos/sabalitos.jpg", "la misma calidad en media docena", "$1.800"],
         Mojarra: ["../img/productos/mojarras.jpg", "Un paquete de 500 gramos de mojarra al vacio", "$1.500"],
@@ -94,14 +94,14 @@ const productos = {
         Tripa_de_gallina: ["../img/productos/tripa de gallina.webp", "Carnada embolsada al vacio para pesca variada", "$4.800"],
     },
     articulosPesca: {
-        Reel_frontal_Skyline_surf_6000: ["../img/productos/skyline surf 6000.webp", "Excelente calidad 3 rodamientos con capacidad para 100 M de linea", "$229.000"],
-        Reel_frontal_Firecast_4000: ["../img/productos/firecast 4000.webp", "Excelente calidad 1 rodamiento con capacidad para 30 M de linea", "$37.600"],
-        Reel_frontal_zest_fox_4000: ["../img/productos/fox 4000.webp", "Excelente calidad 1 rodamiento con capacidad para 40 M de linea", "$47.500"],
-        Reel_frontal_Nitro_500_metal: ["../img/productos/nitro 5000.webp", "Excelente calidad 2 rodamiento con capacidad para 30 M de linea", "$87.700"],
+        Reel_frontal_Skyline_surf_6000: ["../img/productos/skyline surf 6000.webp", "Excelente calidad, 3 rodamientos con capacidad para 100 M de linea", "$229.000"],
+        Reel_frontal_Firecast_4000: ["../img/productos/firecast 4000.webp", "Buena calidad, 1 rodamiento con capacidad para 30 M de linea", "$37.600"],
+        Reel_frontal_zest_fox_4000: ["../img/productos/fox 4000.webp", "Muy buena calidad, 1 rodamiento con capacidad para 40 M de linea", "$47.500"],
+        Reel_frontal_Nitro_500_metal: ["../img/productos/nitro 5000.webp", "Muy buena calidad, 2 rodamiento con capacidad para 30 M de linea", "$87.700"],
         Reel_frontal_XTI_sw_4000: ["../img/productos/XTI sw 4000.webp", "Excelente calidad 2 rodamiento con capacidad para 50 M de linea", "$78.300"],
         Caña_Silvertech_210: ["../img/productos/silvertech 210.webp", "Caña de fibra de vidrio de alta resistencia. 1.66 metros", "$62.700"],
         caña_Mystix_infinity_198_MTS: ["../img/productos/caña mystix.webp", "Caña de pescar clásica Colony de fibra de vidrio. 1.66 metros", "$198.500"],
-        caña_Colony_aventura_MT: ["../img/productos/colony aventura.webp", "Caña de fibra reforzada de vidrio de alta resistencia. 2.0 metros", "$152.200"],
+        caña_Colony_aventura_MT: ["../img/productos/colony aventura.webp", "Caña de fibra de vidrio reforzada de alta resistencia. 2.0 metros", "$152.200"],
         anzuelos: ["../img/productos/anzuelos.webp", "Juego de anzuelos de varias medidas, desde 1/0 hasta 6 ", "$18.700"],
         Lider_de_Pesca: ["../img/productos/lider de pesca.webp", "10 lideres de pesca de acero armado 20 cm", "$5.700"],
         Lider_de_acero_para_pesca: ["../img/productos/lider de pesca acero armado.webp", "Kit de 5 lideres de pesca  acero armado 15 cm", "$3.500"],
@@ -180,6 +180,9 @@ window.addEventListener('popstate', (e) => {
     }
     if (e.state.sitioActual == 'carrito') {
         carrito.mostrar()
+    }
+    if(e.state.sitioActual=='sobreNosotros'){
+        sobreNosotros()
     }
 })
 
@@ -1620,6 +1623,7 @@ const sobreNosotros = () => {
     const contenedorPrincipal = document.querySelector('.contenedorProductos');
     const contenedorElegirArea = document.querySelector('.elegirArea')
     const contenedorSobreNosotros = document.createElement('DIV')
+     if (history.state.sitioActual != 'sobreNosotros') history.pushState({ sitioActual: 'sobreNosotros'},'','#sobreNosotros')
 
     contenedorProductos.style.display = 'block';
 
@@ -1634,9 +1638,10 @@ const sobreNosotros = () => {
      <h1>¡Bienvenidos a nuestra tienda online de artículos de pesca y carnadas!</h1>
      <p>Somos un equipo de cuatro jóvenes emprendedores, Nahuel Gimenez, Suarez Alan, Adán Ledesma y Lautaro De Martin, todos alumnos de 5° año de la EESO N° 267. </p>
      <p>Este sitio web es el complemento de un proyecto de microemprendimiento que nació de nuestra pasión compartida por la pesca y el deseo de ofrecer productos de calidad a la comunidad pesquera.</p>
-    <p>Adán Ledesma, el creador de este espacio digital, invirtió más de 57 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementación final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
-    <p>Nahuel Gimenez es el encargado de la crianza y cuidado de las carnadas, también, se encarga de preparar los tanques o piletones para nuevas carnadas y lograr que todo sea igual que su hábitat, así ustedes adquieren la mejor carnada</p>
-    <p>Alan Suarez se encarga de repartir a domicilio tus compras(carnadas o elementos de pesca), también se encarga de las compras de alimentos para las carnadas o herramientas  para ello</p>
+    <p>Adán Ledesma, el creador de este espacio digital, invirtió alrededor de 60 horas en el desarrollo de este sitio, desde la concepción inical hasta la implementación final. Cada línea de código, cada imagen y cada detalle fueron cuidadosamente pensados para brindar una experiencia de usuario intuitiva y agradable.</p>
+    <p>Nahuel Gimenez es el encargado de la crianza y cuidado de las carnadas, también, se encarga de preparar los tanques o piletones para nuevas carnadas y lograr que todo sea igual que su hábitat, así ustedes adquieren la mejor carnada.</p>
+    <p>Alan Suarez se encarga de repartir a domicilio tus compras(carnadas o elementos de pesca), también se encarga de las compras de alimentos para las carnadas o herramientas  para ello.</p>
+    <p>Por último, Lautaro De Martin, se encarga de la atención al cliente en el local físico, ubicado en el puerto Pira Cuá brindando buena atención al público y asesorando a todos aquellos que son principiantes y no poseen mucho conocimiento al respecto.</p>
     <p>Pero somos más que solo un sitio web.  Somos un equipo comprometido con la excelencia, la innovación y el servicio al cliente. Nuestra misión es proporcionar a los pescadores de todas las edades y niveles de experiencia los mejores productos y el asesoramiento experto que necesitan para disfrutar al máximo de su pasión.</p>
     <p>¿Qué nos diferencia? Además de nuestra dedicación y experiencia, somos estudiantes que entendemos las necesidades y los desafíos de la comunidad local. Nos esforzamos por ofrecer precios competitivos, con una amplia selección  de productos y un servicio personalizado que supera las expectativas.</p>
     <span >Este sitio fue creado con fines educativos y no cuenta con una funcionalidad real de envios, tampoco guardamos  información de los usuarios que visiten esta página. </span>
